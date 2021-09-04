@@ -9,8 +9,8 @@
     <bitmap android:src="@mipmap/logo" />
   </item>
 
-  <item android:gravity="bottom">
+  <!-- <item android:gravity="bottom">
     <bitmap android:src="@mipmap/text" />
-  </item>
+  </item> -->
 
 </layer-list>

@@ -12,6 +12,8 @@ target 'Baseus_Pakistan' do
     :hermes_enabled => false
   )
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'Baseus_PakistanTests' do
     inherit! :complete
     # Pods for testing
