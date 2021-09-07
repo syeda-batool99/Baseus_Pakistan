@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Header = (props) => {
     return(
         <View style={styles.background}>
             <View style={styles.layout}>
-                <MaterialIcons 
+                <FontAwesome 
                     name='bars'
                     size={28}
                     color={'black'}
                 />
                 <Text style={styles.heading}>Baseus Pakistan</Text>
-                <MaterialIcons 
+                <FontAwesome 
                     name='shopping-bag'
                     size={25}
                     color={'black'}
