@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator();
 const AppStack = (myProps) => {
   return (
     <Drawer.Navigator screenOptions={{headerShown:false}} drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Welcome to the App" component={HomeStackScreen} />
+      <Drawer.Screen name="Baseus Pakistan" component={HomeStackScreen} />
     </Drawer.Navigator>
   );
 };
@@ -34,18 +34,13 @@ const HomeStackScreen = ({navigation}) => (
       headerStyle: {
         backgroundColor: '#fff000',
       },
-      headerTintColor: '#000',
-      headerTitleStyle: {
-        fontWeight: '400',
-        // letterSpacing: 6,
-        marginLeft: 55,
-      },
     }}>
     <HomeStack.Screen
       name="Home"
       component={MainBottomTabStack}
       options={{
         title: 'Baseus Pakistan',
+        headerTitleAlign:'center',
         headerLeft: () => (
           <Ionicons.Button
             name="menu"
@@ -61,7 +56,7 @@ const HomeStackScreen = ({navigation}) => (
                     size={25}
                     color={'black'}
                 />
-        )
+        ),
       }}
     />
   </HomeStack.Navigator>
@@ -73,6 +68,12 @@ const MainBottomTabStack = () => {
       screenOptions={{
         headerShown: false,
       }}
+      tabBarOptions={{
+        activeTintColor: 'black',
+        inactiveTintColor: 'black',
+        activeBackgroundColor: '#FFF000',
+        inactiveBackgroundColor: '#FFF000',
+       }}
       >
       <Tab.Screen
         name="Home"
@@ -80,7 +81,7 @@ const MainBottomTabStack = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="home"
-              color={focused ? '#000000' : '#FFF000'}
+              color={focused ? '#000000' : '#52551C'}
               size={26}
             />
           ),
@@ -94,8 +95,8 @@ const MainBottomTabStack = () => {
           tabBarIcon: ({focused}) => (
             <MaterialIcons
               name="shopping-cart"
-              color={focused ? '#000000' : '#FFF000'}
-              size={20}
+              color={focused ? '#000000' : '#52551C'}
+              size={28}
             />
           ),
         }}
@@ -107,7 +108,7 @@ const MainBottomTabStack = () => {
           tabBarIcon: ({focused}) => (
             <MaterialIcons
               name="call"
-              color={focused ? '#000000' : '#FFF000'}
+              color={focused ? '#000000' : '#52551C'}
               size={27}
             />
           ),
@@ -119,8 +120,8 @@ const MainBottomTabStack = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <FontAwesome5
-              name="users"
-              color={focused ? '#000000' : '#FFF000'}
+              name="user-alt"
+              color={focused ? '#000000' : '#52551C'}
               size={20}
             />
           ),

@@ -11,12 +11,13 @@ import {
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 // import {logout} from '../../redux/authActions';
 // import {connect} from 'react-redux';
 
-const DrawerContent = (props) => {
+const DrawerContent = props => {
   return (
     <View style={{flex: 1}}>
       {/* {console.log('Props in drawer', props)} */}
@@ -24,18 +25,22 @@ const DrawerContent = (props) => {
         {/* {console.log('Props in drawer2', props)} */}
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
-            <View style={{flexDirection: 'row', marginTop: 70}}>
+            <View style={{marginTop: 70}}>
               <Image
                 source={require('../assets/logo.png')}
                 style={{
                   width: 130,
                   height: 130,
-                  borderColor: '#AB369B',
+                  // borderColor: '#fff000',
                   borderRadius: 58,
                   borderWidth: 5,
                   marginBottom: 10,
+                  backgroundColor: 'black',
                 }}
               />
+              <Text style={{fontWeight: 'bold', fontSize: 20}}>
+                Baseus Pakistan
+              </Text>
             </View>
           </View>
           <Drawer.Section style={styles.drawerSection}>
@@ -45,44 +50,36 @@ const DrawerContent = (props) => {
               )}
               label="Home"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-            //   onPress={() =>
-            //     props.navigation.navigate('Home', {
-            //       // ...props.route.params,
-            //     })
-            //   }
+                onPress={() =>
+                  props.navigation.navigate('Home', {
+                    // ...props.route.params,
+                  })
+                }
             />
 
             <DrawerItem
               icon={({color}) => (
-                <MaterialCommunityIcons
-                  name="cart"
-                  color={color}
-                  size={31}
-                />
+                <MaterialCommunityIcons name="cart" color={color} size={31} />
               )}
               label="Shop"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-            //   onPress={() =>
-            //     props.navigation.navigate('Chats', {
-            //       // ...props.route.params,
-            //     })
-            //   }
+                onPress={() =>
+                  props.navigation.navigate('Shop', {
+                    // ...props.route.params,
+                  })
+                }
             />
             <DrawerItem
               icon={({color}) => (
-                <MaterialIcons
-                  name="shopping-bag"
-                  color={color}
-                  size={31}
-                />
+                <FontAwesome name="shopping-bag" color={color} size={30} />
               )}
               label="Cart"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-            //   onPress={() =>
-            //     props.navigation.navigate('AvailableJobs', {
-            //       // ...props.route.params,
-            //     })
-            //   }
+                // onPress={() =>
+                //   props.navigation.navigate('AvailableJobs', {
+                //     // ...props.route.params,
+                //   })
+                // }
             />
             <DrawerItem
               icon={({color}) => (
@@ -90,27 +87,23 @@ const DrawerContent = (props) => {
               )}
               label="About Us"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-            //   onPress={() =>
-            //     props.navigation.navigate('SellerOffers', {
-            //       // ...props.route.params,
-            //     })
-            //   }
+              //   onPress={() =>
+              //     props.navigation.navigate('SellerOffers', {
+              //       // ...props.route.params,
+              //     })
+              //   }
             />
             <DrawerItem
               icon={({color}) => (
-                <MaterialIcons
-                  name="call"
-                  color={color}
-                  size={33}
-                />
+                <MaterialIcons name="call" color={color} size={33} />
               )}
               label="Contact Us"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-            //   onPress={() =>
-            //     props.navigation.navigate('Profile', {
-            //       // ...props.route.params,
-            //     })
-            //   }
+                onPress={() =>
+                  props.navigation.navigate('Contact', {
+                    // ...props.route.params,
+                  })
+                }
             />
             <DrawerItem
               icon={({color}) => (
@@ -122,11 +115,11 @@ const DrawerContent = (props) => {
               )}
               label="Signin/Signup"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-            //   onPress={() =>
-            //     props.navigation.navigate('Profile', {
-            //       // ...props.route.params,
-            //     })
-            //   }
+              //   onPress={() =>
+              //     props.navigation.navigate('Profile', {
+              //       // ...props.route.params,
+              //     })
+              //   }
             />
           </Drawer.Section>
         </View>
@@ -170,7 +163,7 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   drawerSection: {
-    marginTop: 5,
+    marginTop: 25,
     fontWeight: 'bold',
     paddingLeft: 15,
   },

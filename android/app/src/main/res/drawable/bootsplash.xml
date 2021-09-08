@@ -6,7 +6,7 @@
  
   <item android:gravity="center">
     <!-- the app logo, centered horizontally and vertically -->
-    <bitmap android:src="@mipmap/logo" />
+    <bitmap android:src="@mipmap/base_us_logo" />
   </item>
 
   <!-- <item android:gravity="bottom">
