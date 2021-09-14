@@ -11,10 +11,10 @@ export default function App() {
     RNBootSplash.hide({fade: true});
   }, []);
   return (
-    // <NavigationContainer>
-    //   <AppStack />
-    // </NavigationContainer>
+    <NavigationContainer>
+      <AppStack />
+    </NavigationContainer>
     // <Home />
-    <Welcome />
+    // <Welcome />
   )
 }
