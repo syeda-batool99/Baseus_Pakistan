@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import * as Colors from '../assets/Colors/index'
 
 const Header = (props) => {
     return(
@@ -24,7 +25,7 @@ const Header = (props) => {
 
 const styles=StyleSheet.create({
     background: {
-        backgroundColor: '#FFF000'
+        backgroundColor: Colors.Yellow
     },
     layout: {
         marginVertical: 15,

@@ -16,6 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 // import {logout} from '../../redux/authActions';
 // import {connect} from 'react-redux';
+import * as Colors from '../assets/Colors/index';
 
 const DrawerContent = props => {
   return (
@@ -27,11 +28,10 @@ const DrawerContent = props => {
           <View style={styles.userInfoSection}>
             <View style={{marginTop: 70}}>
               <Image
-                source={require('../assets/logo.png')}
+                source={require('../assets/Images/logo.png')}
                 style={{
                   width: 130,
                   height: 130,
-                  // borderColor: '#fff000',
                   borderRadius: 58,
                   borderWidth: 5,
                   marginBottom: 10,

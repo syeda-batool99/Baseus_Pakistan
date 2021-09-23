@@ -5,7 +5,7 @@ const Welcome = () => {
     return(
         <View style={{backgroundColor:'#000000', flex: 1, flexDirection:'column', padding: 20}}>
       <View style={{ flex: 1}}>
-          <Image style={{width: 200, height: 100}} source={require('../assets/logo.png')}/>
+          <Image style={{width: 200, height: 100}} source={require('../assets/Images/logo.png')}/>
       </View>
       <View style={{ flex: 2}}>
           <Text style={{textAlign:'center', color:'white', fontSize:40, position:'absolute', bottom:0}}>Welcome to Baseus Pakistan</Text> 

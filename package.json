@@ -21,12 +21,14 @@
     "react": "17.0.2",
     "react-native": "^0.65.1",
     "react-native-bootsplash": "^3.2.4",
+    "react-native-easy-grid": "^0.2.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-slider-box": "^1.1.8",
     "react-native-paper": "^4.9.2",
     "react-native-reanimated": "^2.3.0-alpha.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.6.0",
+    "react-native-table-component": "^1.2.1",
     "react-native-vector-icons": "^8.1.0"
   },
   "devDependencies": {
