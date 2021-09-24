@@ -154,6 +154,7 @@ const HomeStackScreens = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Shop" component={Shop} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
     </Stack.Navigator>
   );

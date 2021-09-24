@@ -12,32 +12,37 @@ import {
 } from 'react-native';
 import {Button} from 'react-native-paper';
 import * as Colors from '../assets/Colors/index';
-
+import NumericInput from 'react-native-numeric-input';
 
 const ProductDetail = props => {
   const item = props.route.params.item;
-  const Specification = {
-      rows:[
-          {id:'1', title:'Producent', data:'Baseus'},
-          {id:'2', title:'Name', data:'Baseus Mini White Cable USB For type C 3A 1m White'},
-          {id:'3', title:'Product Code', data:'	CAMSW-02'},
-          {id:'4', title:'Material', data:'TPE'},
-          {id:'5', title:'Color', data:'White'},
-          {id:'6', title:'Length', data:'1 m'},
-          {id:'7', title:'Connector', data:'USB to type C'},
-          {id:'8', title:'Charging Current', data:'3A'},
-          {id:'9', title:'Transmission Rate', data:'480 Mb/s'},
-      ]
-  }
 
   const renderRow = ({item}) => {
-      return(
-    <View style={{flexDirection:'row', marginVertical:5}}>
-                <Text style={styles.subtitle}>{item.title}: </Text>
-                <Text style={styles.data}> {item.data}</Text>
-    </View>
-      )
-  }
+    return (
+      <View style={{flexDirection: 'row', marginVertical: 5, width: '90%'}}>
+        <Text style={styles.subtitle}>{item.title}: </Text>
+        <Text style={styles.data}> {item.data}</Text>
+      </View>
+    );
+  };
+
+  const renderReviews = ({item}) => {
+    return (
+      <View
+        style={{
+          backgroundColor: 'white',
+          opacity: 0.8,
+          padding: 12,
+          marginVertical: 10,
+          borderRadius: 8,
+        }}>
+        <Text style={styles.reviewsTitle}>
+          {item.username}, {item.date}
+        </Text>
+        <Text>{item.text}</Text>
+      </View>
+    );
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -52,17 +57,57 @@ const ProductDetail = props => {
             <Text style={styles.buttonText}>Add to cart</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.itemDescription}>{item.description}</Text>
+        <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+          <Text style={styles.itemPrice}>Quantity: </Text>
+          <NumericInput
+            onChange={value => console.log(value)}
+            totalWidth={200}
+            totalHeight={40}
+            valueType="real"
+            minValue={0}
+            rounded
+            textColor="white"
+            separatorWidth={0}
+            iconStyle={{color: 'white'}}
+            containerStyle={{marginVertical: 10}}
+            rightButtonBackgroundColor={Colors.Olive}
+            leftButtonBackgroundColor={Colors.Olive}
+          />
+        </View>
+        <Text
+          style={item.description ? styles.itemDescription : {display: 'none'}}>
+          {item.description}
+        </Text>
+        
+
         <Text style={styles.itemCategory}>Category: {item.category}</Text>
         <View style={styles.horizontalLine}></View>
         <View>
-            <Text style={styles.heading}>Specifications </Text>
-            <FlatList
+          <Text style={styles.heading}>Specifications </Text>
+          <FlatList
             horizontal={false}
-            data={Specification.rows}
+            data={item.Specification.rows}
             renderItem={renderRow}
             keyExtractor={item => item.id}
           />
+        </View>
+        <View style={styles.horizontalLine}></View>
+        <View>
+          <Text style={styles.heading}>Reviews</Text>
+          {item.reviews ? (
+            <View>
+              <FlatList
+                horizontal={false}
+                data={item.reviews}
+                renderItem={renderReviews}
+                keyExtractor={item => item.id}
+              />
+            </View>
+          ) : (
+            <View style={{padding: 12, marginVertical: 10, borderRadius: 8}}>
+              <Text style={styles.reviews}>There are no reviews yet.</Text>
+            </View>
+          )}
         </View>
       </View>
     </ScrollView>
@@ -127,21 +172,28 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Yellow,
     marginVertical: 10,
   },
-  heading:{
-      color:'white',
-      fontSize:20,
-      fontWeight:'bold',
-      textAlign:'center'
+  heading: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  subtitle:{
-      fontSize:18,
-      color:Colors.Yellow,
-      fontWeight:'500'
+  subtitle: {
+    fontSize: 18,
+    color: Colors.Yellow,
+    fontWeight: '500',
   },
-  data:{
-      color:'white',
-      marginVertical:3,
-  }
+  data: {
+    color: 'white',
+    marginVertical: 3,
+  },
+  reviews: {
+    color: 'white',
+  },
+  reviewsTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+  },
 });
 
 export default ProductDetail;
