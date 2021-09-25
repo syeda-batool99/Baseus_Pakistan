@@ -2,6 +2,10 @@ import React, {useEffect} from 'react';
 import { Text, View, Image } from "react-native";
 import RNBootSplash from 'react-native-bootsplash';
 import Home from './screens/Home';
+import { Provider } from 'react-redux';
+import store from './redux/configureStore';
+import Providers from './navigation';
+
 import AppStack from './navigation/AppStack';
 import {NavigationContainer} from '@react-navigation/native';
 import Welcome from './screens/Welcome';
@@ -11,9 +15,10 @@ export default function App() {
     RNBootSplash.hide({fade: true});
   }, []);
   return (
-    <NavigationContainer>
-      <AppStack />
-    </NavigationContainer>
+    <Providers store={store}/>
+    // <NavigationContainer>
+    //   <AppStack />
+    // </NavigationContainer>
     // <Home />
     // <Welcome />
   )

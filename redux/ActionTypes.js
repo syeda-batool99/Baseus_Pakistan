@@ -1,4 +1,9 @@
 export const SIGNIN_USER = 'SIGNIN_USER';
 export const SIGNUP_USER = 'SIGNUP_USER';
 export const CLEAR_USER = 'CLEAR_USER';
-export const SET_LOADING = 'SET_LOADING';
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const EMPTY_CART = 'EMPTY_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const ADD_ORDER = 'ADD_ORDER'     

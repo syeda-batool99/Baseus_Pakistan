@@ -52,7 +52,7 @@ const ProductDetail = props => {
       <View style={styles.textContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.itemPrice}>{item.price}</Text>
+          <Text style={styles.itemPrice}>Rs. {item.price}</Text>
           <TouchableOpacity style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Add to cart</Text>
           </TouchableOpacity>

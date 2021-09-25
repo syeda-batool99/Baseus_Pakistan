@@ -75,11 +75,11 @@ const DrawerContent = props => {
               )}
               label="Cart"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-                // onPress={() =>
-                //   props.navigation.navigate('AvailableJobs', {
-                //     // ...props.route.params,
-                //   })
-                // }
+                onPress={() =>
+                  props.navigation.navigate('Cart', {
+                    // ...props.route.params,
+                  })
+                }
             />
             <DrawerItem
               icon={({color}) => (
