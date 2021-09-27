@@ -17,10 +17,12 @@ import NumericInput from 'react-native-numeric-input';
 const Cart = props => {
 
   const cartItemsRender = ({item}) => {
+    const index = props.cartItems.indexOf(item);
+    // console.log('index', index)
     return (
       <View style={styles.cartItemsContainer}>
         <View style={styles.ItemContainer}>
-          <TouchableOpacity onPress={()=>props.RemoveItem(item)}>
+          <TouchableOpacity onPress={()=>props.RemoveItem(item, index)}>
             <MaterialIcons name={'cancel'} color={'white'} size={25} />
           </TouchableOpacity>
         </View>
@@ -54,6 +56,9 @@ const Cart = props => {
       </View>
     );
   };
+  function temp (){
+    props.EmptyCart()
+  }
   return (
     <ScrollView style={styles.background}>
       <Text style={styles.heading}>Cart</Text>
@@ -61,7 +66,7 @@ const Cart = props => {
       <Text style={styles.subheading}>
         Your Cart has {props.cartItems.length} items
       </Text>
-      {props.cartItems.length !=0 && <TouchableOpacity style={styles.emptyCartBtn} onPress={() => props.EmptyCart()}><Text style={styles.emptyCartText}>Empty Cart</Text></TouchableOpacity>}
+      {props.cartItems.length !=0 && <TouchableOpacity style={styles.emptyCartBtn} onPress={temp}><Text style={styles.emptyCartText}>Empty Cart</Text></TouchableOpacity>}
       
       <FlatList
         data={props.cartItems}

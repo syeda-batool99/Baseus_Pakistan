@@ -13,6 +13,8 @@ import {
 import {Button} from 'react-native-paper';
 import * as Colors from '../assets/Colors/index';
 import NumericInput from 'react-native-numeric-input';
+import {connect} from 'react-redux';
+import {addToCart} from '../redux/appActions'
 
 const ProductDetail = props => {
   const item = props.route.params.item;
@@ -53,7 +55,7 @@ const ProductDetail = props => {
         <Text style={styles.itemName}>{item.name}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.itemPrice}>Rs. {item.price}</Text>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonContainer} onPress={()=>props.AddToCart(item)}>
             <Text style={styles.buttonText}>Add to cart</Text>
           </TouchableOpacity>
         </View>
@@ -196,4 +198,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductDetail;
+const mapStateToProps = state => ({
+  // user: state.userDetails.user,
+  products: state.appData.Products,
+  categories: state.appData.Categories,
+  // token: state.userDetails.token,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    AddToCart: (body) => dispatch(addToCart(body)),
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(ProductDetail);

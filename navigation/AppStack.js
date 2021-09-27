@@ -18,6 +18,7 @@ import Shop from '../screens/Shop';
 import ProductDetail from '../screens/ProductDetail';
 import Cart from '../screens/Cart';
 import {connect} from 'react-redux';
+import ShoppingcartItem from '../screens/ShoppingcartItem';
 // import Icon from 'react-native-vector-icons';
 
 const HomeStack = createStackNavigator();
@@ -47,30 +48,8 @@ const AppStack = props => {
               color={'black'}
               onPress={() => navigation.openDrawer()}></Ionicons.Button>
           ),
-          headerRight: () => (
-            <View>
-              <FontAwesome.Button
-                name="shopping-bag"
-                backgroundColor={Colors.Yellow}
-                size={25}
-                color={'black'}
-                onPress={() => navigation.navigate('Cart')}
-              />
-                <Text
-                  style={{
-                    color: 'black',
-                    position: 'absolute',
-                    // left: 0,
-                    right: 12,
-                    top: 0,
-                    bottom: 0,
-                    fontWeight:'bold',
-                    fontSize:15
-                  }}>
-                  {props.cartItems.length}
-                </Text>
-            </View>
-          ),
+          headerRight: () => <ShoppingcartItem navigation={navigation}/>
+          ,
         }}
       />
     </HomeStack.Navigator>
@@ -193,12 +172,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({
-  // user: state.userDetails.user,
-  cartItems: state.cart.cart,
-  cartTotal: state.cart.total,
-  order: state.order,
-  // token: state.userDetails.token,
-});
-
-export default connect(mapStateToProps)(AppStack);
+export default AppStack

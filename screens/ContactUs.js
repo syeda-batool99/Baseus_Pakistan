@@ -314,6 +314,7 @@ const Contact = () => {
                           <TextInput
                             style={styles.input}
                             placeholder=" Name"
+                            placeholderTextColor={'white'}
                             onChangeText={propss.handleChange('name')}
                             value={propss.values.name}
                             onBlur={propss.handleBlur('name')}
@@ -323,6 +324,7 @@ const Contact = () => {
                           <TextInput
                             style={styles.input}
                             placeholder=" Email"
+                            placeholderTextColor={'white'}
                             onChangeText={propss.handleChange('email')}
                             value={propss.values.email}
                             onBlur={propss.handleBlur('email')}
@@ -332,6 +334,7 @@ const Contact = () => {
                           <TextInput
                             style={styles.input}
                             placeholder=" Subject"
+                            placeholderTextColor={'white'}
                             onChangeText={propss.handleChange('subject')}
                             value={propss.values.subject}
                             onBlur={propss.handleBlur('subject')}
@@ -343,6 +346,7 @@ const Contact = () => {
                             numberOfLines={4}
                             multiline={true}
                             placeholder=" Message"
+                            placeholderTextColor={'white'}
                             onChangeText={propss.handleChange('message')}
                             value={propss.values.message}
                             onBlur={propss.handleBlur('message')}
@@ -385,8 +389,11 @@ const styles = StyleSheet.create({
   subheading: {color: 'white', fontSize: 22, marginBottom: 10},
   data: {color: 'white', fontSize: 18, color: Colors.LightYellow, width:'90%'},
   input:{
-      backgroundColor:'#ececec',
-      borderRadius:8
+      backgroundColor:'transparent',
+      borderColor:'#ececec',
+      borderWidth:1,
+      borderRadius:8,
+      color:'white'
   },
   button:{
     backgroundColor: Colors.Yellow,

@@ -10,13 +10,15 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {Searchbar} from 'react-native-paper';
+// import {Searchbar} from 'react-native-paper';
+import Searchbar from './Searchbar'
 import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
-import {addToCart} from '../redux/appActions'
+import {addToCart} from '../redux/appActions';
+
+
 
 const Shop = props => {
-
   const renderProduct = item => <Product item={item.item} />;
 
   const Product = ({item}) => {
@@ -71,7 +73,9 @@ const Shop = props => {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={{marginBottom: 15, width: 100}} onPress={()=>props.AddToCart(item)}>
+        <TouchableOpacity
+          style={{marginBottom: 15, width: 100}}
+          onPress={() => props.AddToCart(item)}>
           <Text
             style={{
               backgroundColor: Colors.Yellow,
@@ -87,52 +91,46 @@ const Shop = props => {
     );
   };
   const [searchQuery, setSearchQuery] = useState('');
-  const onChangeSearch = query => setSearchQuery(query);
-  // let SearchedProduct = products.filter(p => {
-  //   return p.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
-  // });
+  const [showProducts, setShowProducts] = useState(props.products);
 
-  const renderSearchbar = () => {
-    return (
-      <View>
-        {props.route.params ? (
-          <Text style={styles.heading}>{props.route.params.item.name}</Text>
-        ) : (
-          <Text style={styles.heading}>All Products</Text>
-        )}
-        <Searchbar
-          style={{marginBottom:20, marginHorizontal: 10}}
-          placeholder="Search"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-        />
-        
-      </View>
-    );
+  const onChangeSearch = query => {
+    setSearchQuery(query);
+    let SearchedProduct = props.products.filter(p => {
+      return p.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    });
+    console.log('query', query, SearchedProduct.length);
+    setShowProducts(SearchedProduct);
   };
+
   return (
     <TouchableWithoutFeedback>
       <View style={styles.background}>
         <View style={styles.container}>
           {props.route.params ? (
+            <Text style={styles.heading}>{props.route.params.item.name}</Text>
+          ) : (
+            <Text style={styles.heading}>All Products</Text>
+          )}
+          <Searchbar value={searchQuery} onChangeSearch={onChangeSearch}/>
+          {props.route.params ? (
             <FlatList
               horizontal={false}
               numColumns={3}
-              data={props.products.filter(
+              data={showProducts.filter(
                 product => product.category == props.route.params.item.name,
               )}
               renderItem={renderProduct}
               keyExtractor={item => item.id}
-              ListHeaderComponent={renderSearchbar}
+              // ListHeaderComponent={renderSearchbar}
             />
           ) : (
             <FlatList
               horizontal={false}
               numColumns={3}
-              data={props.products}
+              data={showProducts}
               renderItem={renderProduct}
               keyExtractor={item => item.id}
-              ListHeaderComponent={renderSearchbar}
+              // ListHeaderComponent={renderSearchbar}
             />
           )}
         </View>
@@ -154,8 +152,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 20,
-    textAlign:'center',
-    marginVertical:10
+    textAlign: 'center',
+    marginVertical: 10,
   },
 });
 
@@ -165,11 +163,9 @@ const mapStateToProps = state => ({
   categories: state.appData.Categories,
   // token: state.userDetails.token,
 });
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    AddToCart: (body) => dispatch(addToCart(body)),
+    AddToCart: body => dispatch(addToCart(body)),
   };
 };
-export default connect(mapStateToProps,mapDispatchToProps)(Shop);
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
