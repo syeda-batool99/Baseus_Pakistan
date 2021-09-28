@@ -10,19 +10,18 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import * as Colors from '../assets/Colors/index';
-import {removeItem,emptyCart} from '../redux/appActions';
+import {removeItem, emptyCart} from '../redux/appActions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import NumericInput from 'react-native-numeric-input';
 
 const Cart = props => {
-
   const cartItemsRender = ({item}) => {
     const index = props.cartItems.indexOf(item);
     // console.log('index', index)
     return (
       <View style={styles.cartItemsContainer}>
         <View style={styles.ItemContainer}>
-          <TouchableOpacity onPress={()=>props.RemoveItem(item, index)}>
+          <TouchableOpacity onPress={() => props.RemoveItem(item, index)}>
             <MaterialIcons name={'cancel'} color={'white'} size={25} />
           </TouchableOpacity>
         </View>
@@ -56,26 +55,64 @@ const Cart = props => {
       </View>
     );
   };
-  function temp (){
-    props.EmptyCart()
+  function temp() {
+    props.EmptyCart();
   }
   return (
     <ScrollView style={styles.background}>
       <Text style={styles.heading}>Cart</Text>
-      
+
       <Text style={styles.subheading}>
         Your Cart has {props.cartItems.length} items
       </Text>
-      {props.cartItems.length !=0 && <TouchableOpacity style={styles.emptyCartBtn} onPress={temp}><Text style={styles.emptyCartText}>Empty Cart</Text></TouchableOpacity>}
-      
+      {props.cartItems.length != 0 && (
+        <TouchableOpacity style={styles.emptyCartBtn} onPress={temp}>
+          <Text style={styles.emptyCartText}>Empty Cart</Text>
+        </TouchableOpacity>
+      )}
+
       <FlatList
         data={props.cartItems}
         renderItem={cartItemsRender}
         keyExtractor={item => item.id}
       />
-      <TouchableOpacity>
-          <Text>Proceed to Checkout</Text>
+      {props.cartItems.length > 0 && <View>
+        <Text style={styles.subheading}>Cart Total</Text>
+      <View style={styles.cartItemsContainer}>
+        <View
+          style={[styles.ItemContainer2, {justifyContent: 'space-between'}]}>
+          <Text style={styles.subheading}>Subtotal: </Text>
+          <Text style={[styles.valueTotal, {right: 10}]}>
+            {' '}
+            Rs. {props.cartTotal}
+          </Text>
+        </View>
+        <View
+          style={[styles.ItemContainer2, {justifyContent: 'space-between'}]}>
+          <Text style={styles.subheading}>Shipping: </Text>
+          <Text
+            style={[
+              styles.valueTotal,
+              {right: 10, fontWeight: 'normal', fontSize: 14},
+            ]}>
+            {' '}
+            Rs. 200
+          </Text>
+        </View>
+        <View
+          style={[styles.ItemContainer2, {justifyContent: 'space-between'}]}>
+          <Text style={styles.subheading}>Cart Total: </Text>
+          <Text style={[styles.valueTotal, {right: 10}]}>
+            {' '}
+            Rs. {props.cartTotal + 200}
+          </Text>
+        </View>
+      </View>
+      <TouchableOpacity style={styles.btnContainer} onPress={() => props.navigation.navigate("Checkout")}>
+        <Text style={styles.button}>Proceed to Checkout</Text>
       </TouchableOpacity>
+        </View>}
+      
     </ScrollView>
   );
 };
@@ -124,20 +161,38 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 3,
   },
-  emptyCartBtn:{
-      backgroundColor:Colors.Yellow,
-      padding:8,
-      borderRadius:12,
-      width:'50%',
-      alignItems:'center',
-      alignSelf:'center',
-      marginBottom:8
+  emptyCartBtn: {
+    backgroundColor: Colors.Yellow,
+    padding: 8,
+    borderRadius: 12,
+    width: '50%',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 8,
   },
-  emptyCartText:{
-      color:Colors.VeryDarkGray,
-      fontSize:15,
-      fontWeight:'500'
-  }
+  emptyCartText: {
+    color: Colors.VeryDarkGray,
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  valueTotal: {
+    color: 'white',
+    marginVertical: 12,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: Colors.Yellow,
+    textAlign: 'center',
+    borderRadius: 12,
+    fontStyle: 'italic',
+    padding: 10,
+  },
+  btnContainer: {
+    width: '50%',
+    alignSelf:'center',
+    marginVertical:10
+  },
 });
 
 const mapStateToProps = state => ({
@@ -150,11 +205,11 @@ const mapStateToProps = state => ({
   // token: state.userDetails.token,
 });
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-      RemoveItem: (body,id) => dispatch(removeItem(body,id)),
-      EmptyCart: () => dispatch(emptyCart())
-    };
+const mapDispatchToProps = dispatch => {
+  return {
+    RemoveItem: (body, id) => dispatch(removeItem(body, id)),
+    EmptyCart: () => dispatch(emptyCart()),
   };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

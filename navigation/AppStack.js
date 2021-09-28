@@ -19,6 +19,7 @@ import ProductDetail from '../screens/ProductDetail';
 import Cart from '../screens/Cart';
 import {connect} from 'react-redux';
 import ShoppingcartItem from '../screens/ShoppingcartItem';
+import Checkout from '../screens/Checkout';
 // import Icon from 'react-native-vector-icons';
 
 const HomeStack = createStackNavigator();
@@ -131,6 +132,8 @@ const AppStack = props => {
         <Stack.Screen name="Shop" component={Shop} />
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="Checkout" component={Checkout} />
+
       </Stack.Navigator>
     );
   };
@@ -145,6 +148,8 @@ const AppStack = props => {
         <Stack.Screen name="Shop" component={Shop} />
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="Checkout" component={Checkout} />
+
       </Stack.Navigator>
     );
   };

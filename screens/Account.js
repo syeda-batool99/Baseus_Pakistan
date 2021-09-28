@@ -28,7 +28,11 @@ const Account = props => {
       <Text style={styles.heading}>My Account</Text>
       {login ? (
         <View>
-          <UserAccount/>
+          <TouchableOpacity style={{alignSelf:'center'}}
+          onPress={() => setLogin(false)}>
+          <Text style={{color:'white', fontSize:18}}> Signout</Text>
+          </TouchableOpacity>
+          <UserAccount login={login}/>
         </View>
       ) : (
         <GuestAccount handleSubmit={handleSubmit}/>

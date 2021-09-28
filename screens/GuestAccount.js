@@ -76,7 +76,7 @@ const GuestAccount = (props) => {
                         <TextInput
                           style={styles.input}
                           placeholder=" Email"
-                          placeholderTextColor={'white'}
+                          placeholderTextColor={Colors.LightGray}
                           onChangeText={propss.handleChange('email')}
                           value={propss.values.email}
                           onBlur={propss.handleBlur('email')}
@@ -86,7 +86,7 @@ const GuestAccount = (props) => {
                         <TextInput
                           style={styles.input}
                           placeholder=" Password"
-                          placeholderTextColor={'white'}
+                          placeholderTextColor={Colors.LightGray}
                           onChangeText={propss.handleChange('password')}
                           value={propss.values.password}
                           onBlur={propss.handleBlur('password')}
@@ -137,7 +137,7 @@ const GuestAccount = (props) => {
                         <TextInput
                           style={styles.input}
                           placeholder=" Email"
-                          placeholderTextColor={'white'}
+                          placeholderTextColor={Colors.LightGray}
                           onChangeText={propss.handleChange('email')}
                           value={propss.values.email}
                           onBlur={propss.handleBlur('email')}
@@ -147,7 +147,7 @@ const GuestAccount = (props) => {
                         <TextInput
                           style={styles.input}
                           placeholder=" Password"
-                          placeholderTextColor={'white'}
+                          placeholderTextColor={Colors.LightGray}
                           onChangeText={propss.handleChange('password')}
                           value={propss.values.password}
                           onBlur={propss.handleBlur('password')}
@@ -160,7 +160,7 @@ const GuestAccount = (props) => {
                         <TextInput
                           style={styles.input}
                           placeholder=" Phone Number"
-                          placeholderTextColor={'white'}
+                          placeholderTextColor={Colors.LightGray}
                           onChangeText={propss.handleChange('number')}
                           value={propss.values.number}
                           onBlur={propss.handleBlur('number')}
@@ -169,7 +169,7 @@ const GuestAccount = (props) => {
                     </View>
                     <View style={{marginTop: 10}}>
                       <TouchableOpacity
-                        onPress={propss.handleSubmit}
+                        onPress={props.handleSubmit}
                         style={styles.btnContainer}>
                         <Text style={styles.button}>REGISTER</Text>
                       </TouchableOpacity>

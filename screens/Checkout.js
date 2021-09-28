@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -7,85 +14,12 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
-const UserAccount = props => {
+const Checkout = () => {
   return (
-    <View>
-      <View style={styles.box}>
-        <View style={{flexDirection: 'row'}}>
-          <FontAwesome name={'user-circle'} size={30} />
-          <Text style={styles.userName}>Hello, User</Text>
-          
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            margin: 20,
-            justifyContent: 'space-between',
-          }}>
-          <View>
-            <Text style={{textAlign: 'center'}}>0</Text>
-            <Text>Orders</Text>
-          </View>
-          <View>
-            <Text style={{textAlign: 'center'}}>0</Text>
-            <Text>Returns</Text>
-          </View>
-          <View>
-            <Text style={{textAlign: 'center'}}>0</Text>
-            <Text>Cancellations</Text>
-          </View>
-        </View>
-      </View>
+    <ScrollView style={styles.background}>
+      <Text style={styles.heading}>Checkout</Text>
       <View style={styles.box1}>
-        <Text style={styles.subheading}>Edit Profile</Text>
-        <Formik
-                initialValues={{ password: '', number: ''}}
-                onSubmit={(values, actions) => {
-                  console.log(values);
-                }}>
-                {propss => (
-                  <View>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        alignContent: 'space-around',
-                        marginVertical:10
-                      }}>
-                      <View style={{marginBottom: 7}}>
-                        <TextInput
-                          style={styles.input}
-                          placeholder=" Password"
-                          placeholderTextColor={Colors.LightGray}
-                          onChangeText={propss.handleChange('password')}
-                          value={propss.values.password}
-                          onBlur={propss.handleBlur('password')}
-                          type="password"
-                          secureTextEntry={true}
-                          autoCompleteType="password"
-                        />
-                      </View>
-                      <View style={{marginBottom: 7}}>
-                        <TextInput
-                          style={styles.input}
-                          placeholder=" Phone Number"
-                          placeholderTextColor={Colors.LightGray}
-                          onChangeText={propss.handleChange('number')}
-                          value={propss.values.number}
-                          onBlur={propss.handleBlur('number')}
-                        />
-                      </View>
-                    </View>
-                      <TouchableOpacity
-                        onPress={propss.handleSubmit}
-                        style={styles.btnContainer}>
-                        <Text style={styles.button}>SAVE CHANGES</Text>
-                      </TouchableOpacity>
-                  </View>
-                )}
-              </Formik>
-      </View>
-      <View style={styles.box1}>
-        <Text style={styles.subheading}>Manage Address</Text>
+        <Text style={styles.subheading}>Details</Text>
         <Formik
           initialValues={{
             firstName: '',
@@ -209,35 +143,37 @@ const UserAccount = props => {
               <TouchableOpacity
                 onPress={propss.handleSubmit}
                 style={styles.btnContainer}>
-                <Text style={styles.button}>SAVE NEW ADDRESS</Text>
+                <Text style={styles.button}>PLACE ORDER</Text>
               </TouchableOpacity>
             </View>
           )}
         </Formik>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  box: {
-    backgroundColor: 'white',
-    borderRadius: 8,
-    padding: 10,
-    margin: 10,
+  background: {
+    backgroundColor: Colors.VeryDarkGray,
+    flex: 1,
+    paddingHorizontal: 15,
+    paddingVertical:10
   },
-  userName: {
+  heading: {
+    color: 'white',
+    fontWeight: 'bold',
     fontSize: 20,
-    marginHorizontal: 20,
+    textAlign: 'center',
+    marginBottom: 10,
   },
   box1: {
     borderRadius: 8,
     borderColor: 'white',
     borderWidth: 1,
     padding: 10,
-    margin: 10,
   },
-  subheading: {color: 'white', fontSize: 22, marginHorizontal: 20},
+  subheading: {color: 'white', fontSize: 22},
   button: {
     backgroundColor: Colors.Yellow,
     textAlign: 'center',
@@ -267,4 +203,4 @@ const mapStateToProps = state => ({
   // token: state.userDetails.token,
 });
 
-export default connect(mapStateToProps)(UserAccount);
+export default connect(mapStateToProps)(Checkout);

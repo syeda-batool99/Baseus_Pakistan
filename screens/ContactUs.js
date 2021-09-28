@@ -314,7 +314,7 @@ const Contact = () => {
                           <TextInput
                             style={styles.input}
                             placeholder=" Name"
-                            placeholderTextColor={'white'}
+                            placeholderTextColor={Colors.LightGray}
                             onChangeText={propss.handleChange('name')}
                             value={propss.values.name}
                             onBlur={propss.handleBlur('name')}
@@ -324,7 +324,7 @@ const Contact = () => {
                           <TextInput
                             style={styles.input}
                             placeholder=" Email"
-                            placeholderTextColor={'white'}
+                            placeholderTextColor={Colors.LightGray}
                             onChangeText={propss.handleChange('email')}
                             value={propss.values.email}
                             onBlur={propss.handleBlur('email')}
@@ -334,7 +334,7 @@ const Contact = () => {
                           <TextInput
                             style={styles.input}
                             placeholder=" Subject"
-                            placeholderTextColor={'white'}
+                            placeholderTextColor={Colors.LightGray}
                             onChangeText={propss.handleChange('subject')}
                             value={propss.values.subject}
                             onBlur={propss.handleBlur('subject')}
@@ -346,7 +346,7 @@ const Contact = () => {
                             numberOfLines={4}
                             multiline={true}
                             placeholder=" Message"
-                            placeholderTextColor={'white'}
+                            placeholderTextColor={Colors.LightGray}
                             onChangeText={propss.handleChange('message')}
                             value={propss.values.message}
                             onBlur={propss.handleBlur('message')}
