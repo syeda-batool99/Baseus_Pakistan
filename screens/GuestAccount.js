@@ -56,7 +56,7 @@ const GuestAccount = (props) => {
             </View>
           </Modal>
           <View style={styles.box}>
-            <Text style={{color: 'white', fontSize: 22, marginHorizontal: 20}}>
+            <Text style={{ fontSize: 22, marginHorizontal: 20}}>
               Login
             </Text>
             <View style={{margin: 15}}>
@@ -117,7 +117,7 @@ const GuestAccount = (props) => {
             </View>
           </View>
           <View style={styles.box}>
-            <Text style={{color: 'white', fontSize: 22, marginHorizontal: 20}}>
+            <Text style={{ fontSize: 22, marginHorizontal: 20}}>
               Register
             </Text>
             <View style={{margin: 15}}>
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
         borderColor: '#ececec',
         borderWidth: 1,
         borderRadius: 8,
-        color: 'white',
+        // color: 'white',
       },
       button: {
         backgroundColor: Colors.Yellow,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         width: '50%',
       },
       forgotText: {
-        color: Colors.Yellow,
+        color: Colors.Olive,
         padding: 10,
       },
       box: {

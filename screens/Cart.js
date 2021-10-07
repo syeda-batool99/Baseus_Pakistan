@@ -22,7 +22,7 @@ const Cart = props => {
       <View style={styles.cartItemsContainer}>
         <View style={styles.ItemContainer}>
           <TouchableOpacity onPress={() => props.RemoveItem(item, index)}>
-            <MaterialIcons name={'cancel'} color={'white'} size={25} />
+            <MaterialIcons name={'cancel'} color={'black'} size={25} />
           </TouchableOpacity>
         </View>
         <View style={styles.ItemContainer2}>
@@ -41,7 +41,7 @@ const Cart = props => {
             totalHeight={35}
             valueType="real"
             minValue={0}
-            textColor="white"
+            textColor="black"
             separatorWidth={0}
             iconStyle={{color: 'white'}}
             rightButtonBackgroundColor={Colors.Olive}
@@ -119,30 +119,30 @@ const Cart = props => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.VeryDarkGray,
+    backgroundColor: Colors.White,
     flex: 1,
   },
   heading: {
-    color: 'white',
+    // color: 'white',
     fontWeight: 'bold',
     fontSize: 20,
     textAlign: 'center',
     marginVertical: 10,
   },
   subheading: {
-    color: Colors.LightYellow,
+    color: Colors.VeryDarkGray,
     fontWeight: 'bold',
     fontSize: 17,
     textAlign: 'center',
     marginVertical: 10,
   },
   value: {
-    color: 'white',
+    color: Colors.Olive,
     marginVertical: 12,
     width: '80%',
   },
   cartItemsContainer: {
-    borderColor: Colors.Yellow,
+    borderColor: Colors.VeryDarkGray,
     borderWidth: 1,
     marginHorizontal: 20,
     marginVertical: 5,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   valueTotal: {
-    color: 'white',
+    color: Colors.Olive,
     marginVertical: 12,
     fontSize: 16,
     fontWeight: 'bold',

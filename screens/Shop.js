@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,11 +14,21 @@ import {
 import Searchbar from './Searchbar'
 import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
-import {addToCart} from '../redux/appActions';
+import {addToCart, getProducts, getProductsByCategory} from '../redux/appActions';
 
 
 
 const Shop = props => {
+  const [ProductsFromApiCall, setProducts] = useState([]);
+  const [ProductsByCategory, setProductsByCategory] = useState([]);
+  async function temp() {
+     setProducts(await props.GetProducts());
+     setProductsByCategory(await props.GetProductsByCategory(props.route.params.item.id));
+  }
+
+  useEffect(() => {
+    temp()
+  }, []);
   const renderProduct = item => <Product item={item.item} />;
 
   const Product = ({item}) => {
@@ -34,7 +44,7 @@ const Shop = props => {
           }}>
           <View style={{width: 100, marginRight: 35}}>
             <Image
-              source={item.image}
+              source={{ uri: item.images[0].src }}
               style={{
                 width: 100,
                 height: 100,
@@ -51,10 +61,11 @@ const Shop = props => {
               style={{
                 fontSize: 13,
                 marginTop: 5,
-                color: 'white',
+                marginLeft:12,
+                // color: 'white',
                 fontWeight: 'bold',
                 // width: 100,
-                textAlign: 'center',
+                textAlign: 'left',
                 // textAlignVertical: 'center',
                 // height: 100,
               }}
@@ -63,7 +74,7 @@ const Shop = props => {
             </Text>
             <Text
               style={{
-                color: Colors.Yellow,
+                color: Colors.Olive,
                 textAlign: 'center',
                 fontSize: 12,
                 fontWeight: 'bold',
@@ -91,7 +102,6 @@ const Shop = props => {
     );
   };
   const [searchQuery, setSearchQuery] = useState('');
-  const [showProducts, setShowProducts] = useState(props.products);
 
   const onChangeSearch = query => {
     setSearchQuery(query);
@@ -103,7 +113,7 @@ const Shop = props => {
   };
 
   return (
-    <TouchableWithoutFeedback>
+    <ScrollView>
       <View style={styles.background}>
         <View style={styles.container}>
           {props.route.params ? (
@@ -116,9 +126,7 @@ const Shop = props => {
             <FlatList
               horizontal={false}
               numColumns={3}
-              data={showProducts.filter(
-                product => product.category == props.route.params.item.name,
-              )}
+              data={ProductsByCategory}
               renderItem={renderProduct}
               keyExtractor={item => item.id}
               // ListHeaderComponent={renderSearchbar}
@@ -127,7 +135,7 @@ const Shop = props => {
             <FlatList
               horizontal={false}
               numColumns={3}
-              data={showProducts}
+              data={ProductsFromApiCall}
               renderItem={renderProduct}
               keyExtractor={item => item.id}
               // ListHeaderComponent={renderSearchbar}
@@ -135,13 +143,13 @@ const Shop = props => {
           )}
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.VeryDarkGray,
+    backgroundColor: Colors.White,
     flex: 1,
   },
   container: {
@@ -149,7 +157,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   heading: {
-    color: 'white',
+    // color: 'white',
     fontWeight: 'bold',
     fontSize: 20,
     textAlign: 'center',
@@ -166,6 +174,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     AddToCart: body => dispatch(addToCart(body)),
+    GetProducts : () => dispatch(getProducts()),
+    GetProductsByCategory: categoryId => dispatch(getProductsByCategory(categoryId))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Shop);

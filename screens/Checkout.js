@@ -155,13 +155,13 @@ const Checkout = () => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.VeryDarkGray,
+    backgroundColor: Colors.White,
     flex: 1,
     paddingHorizontal: 15,
     paddingVertical:10
   },
   heading: {
-    color: 'white',
+    // color: 'white',
     fontWeight: 'bold',
     fontSize: 20,
     textAlign: 'center',
@@ -169,11 +169,11 @@ const styles = StyleSheet.create({
   },
   box1: {
     borderRadius: 8,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 1,
     padding: 10,
   },
-  subheading: {color: 'white', fontSize: 22},
+  subheading: {fontSize: 22},
   button: {
     backgroundColor: Colors.Yellow,
     textAlign: 'center',

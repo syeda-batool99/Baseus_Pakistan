@@ -16,11 +16,17 @@ import {
 import Header from '../shared/Header';
 import {SliderBox} from 'react-native-image-slider-box';
 import * as Colors from '../assets/Colors/index';
-import {getProducts} from '../shared/Products';
+// import {getProducts} from '../shared/Products';
 import {connect} from 'react-redux';
-import {addToCart} from '../redux/appActions'
+import {addToCart, getProducts, getCategories} from '../redux/appActions'
 
 const Home = props => {
+  const [ProductsFromApiCall, setProducts] = useState([]);
+  const [Categories, setCategories] = useState([]);
+  async function temp() {
+     setProducts(await props.GetProducts());
+     setCategories(await props.GetCategories())
+  }
   const images = {
     images: [
       require('../assets/Images/image_1.jpeg'),
@@ -29,6 +35,10 @@ const Home = props => {
       require('../assets/Images/image_4.jpeg'),
     ],
   };
+
+  useEffect(() => {
+    temp()
+  }, []);
 
   const renderItem = item => <Item item={item.item} />;
 
@@ -61,7 +71,7 @@ const Home = props => {
           });
         }}>
         <View style={{width: 100, marginRight: 35}}>
-          <Image source={item.image} style={styles.productImage} />
+          <Image source={{ uri: item.images[0].src }} style={styles.productImage} />
           <Text
             // adjustsFontSizeToFit= {true}
             // ellipsizeMode={'tail'}
@@ -94,7 +104,7 @@ const Home = props => {
         <SafeAreaView style={styles.container}>
           <FlatList
             horizontal
-            data={props.categories}
+            data={Categories}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
@@ -102,10 +112,10 @@ const Home = props => {
         <View style={styles.subtitleContainer}>
           <Text style={styles.subtitle}>Products</Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Shop')}>
-            <Text
+            <Text 
               style={{
                 fontSize: 16,
-                color: '#FFFFFF',
+                // color: '#FFFFFF',
               }}>
               See All
             </Text>
@@ -115,7 +125,7 @@ const Home = props => {
           <FlatList
             horizontal={false}
             numColumns={3}
-            data={props.products}
+            data={ProductsFromApiCall.slice(0,6)}
             renderItem={renderProduct}
             keyExtractor={item => item.id}
           />
@@ -127,7 +137,7 @@ const Home = props => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.VeryDarkGray,
+    backgroundColor: Colors.White,
     flex: 1,
   },
   container: {
@@ -144,7 +154,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontWeight: 'bold',
     fontSize: 20,
-    color: Colors.Yellow,
+    color: Colors.VeryDarkGray,
   },
   categoryImage: {
     width: 80,
@@ -155,7 +165,7 @@ const styles = StyleSheet.create({
   categoryTitle: {
     fontSize: 13,
     marginTop: 5,
-    color: 'white',
+    // color: 'white',
     fontWeight: 'bold',
     width: 100,
     textAlign: 'center',
@@ -172,15 +182,15 @@ const styles = StyleSheet.create({
   productName: {
     fontSize: 13,
     marginTop: 5,
-    color: 'white',
+    marginLeft:12,
+    // color: 'white',
     fontWeight: 'bold',
     // width: 100,
-    textAlign: 'center',
-    // textAlignVertical: 'center',
+    textAlign:'left'
     // height: 100,
   },
   productPrice: {
-    color: Colors.Yellow,
+    color: Colors.Olive,
     textAlign: 'center',
     fontSize: 12,
     fontWeight: 'bold',
@@ -203,6 +213,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     AddToCart: (body) => dispatch(addToCart(body)),
+    GetProducts : () => dispatch(getProducts()),
+    GetCategories : () => dispatch(getCategories())
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(Home);

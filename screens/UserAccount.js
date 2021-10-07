@@ -221,7 +221,7 @@ const UserAccount = props => {
 
 const styles = StyleSheet.create({
   box: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.LightYellow,
     borderRadius: 8,
     padding: 10,
     margin: 10,
@@ -232,12 +232,12 @@ const styles = StyleSheet.create({
   },
   box1: {
     borderRadius: 8,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 1,
     padding: 10,
     margin: 10,
   },
-  subheading: {color: 'white', fontSize: 22, marginHorizontal: 20},
+  subheading: {fontSize: 22, marginHorizontal: 20},
   button: {
     backgroundColor: Colors.Yellow,
     textAlign: 'center',
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     borderColor: '#ececec',
     borderWidth: 1,
     borderRadius: 8,
-    color: 'white',
+    // color: 'white',
   },
 });
 

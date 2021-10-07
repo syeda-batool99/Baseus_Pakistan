@@ -30,7 +30,7 @@ const Account = props => {
         <View>
           <TouchableOpacity style={{alignSelf:'center'}}
           onPress={() => setLogin(false)}>
-          <Text style={{color:'white', fontSize:18}}> Signout</Text>
+          <Text style={{ fontSize:18}}> Signout</Text>
           </TouchableOpacity>
           <UserAccount login={login}/>
         </View>
@@ -43,12 +43,12 @@ const Account = props => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.VeryDarkGray,
+    backgroundColor: Colors.White,
     flex: 1,
     paddingHorizontal: 15,
   },
   heading: {
-    color: 'white',
+    // color: 'white',
     fontWeight: 'bold',
     fontSize: 25,
     textAlign: 'center',

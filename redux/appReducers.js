@@ -1,25 +1,32 @@
-import {GET_CATEGORIES, GET_PRODUCTS} from './ActionTypes';
-import {products} from '../shared/Products';
-import {categories} from '../shared/Categories';
+import {GET_CATEGORIES, GET_PRODUCTS, GET_REVIEWS} from './ActionTypes';
 
 const initialState = {
-  Products: products,
-  Categories: categories
+  Products: [],
+  Categories: [],
+  Reviews: []
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
+      // console.log('action.payload', action.payload);
       return {
         ...state,
-        Products: products
+        Products: action.payload
         
       };
     case GET_CATEGORIES:
-      console.log('action.payload', action.payload);
+      // console.log('action.payload', action.payload);
       return {
         ...state,
-        Categories: categories
+        Categories: action.payload
+        
+      };
+      case GET_REVIEWS:
+      // console.log('action.payload', action.payload);
+      return {
+        ...state,
+      Reviews: action.payload
         
       };
     default:

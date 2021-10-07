@@ -8,28 +8,92 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   EMPTY_CART,
+  GET_REVIEWS
 } from './ActionTypes';
-import {products} from '../shared/Products';
+import axios from 'axios';
 import {categories} from '../shared/Categories';
+import Constants from './Constants';
 // import {URL, loginRoute, signupRoute, verifyCNICRoute} from '../config/const';
 
 export const getProducts = () => async dispatch => {
-  dispatch({
-    type: GET_PRODUCTS,
-    payload: products,
-  });
+  const url = `${Constants.URL.wc}products?per_page=30&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try{
+    let response = await axios.get(url);
+    // console.log('response getProducts', response.data[0]);
+    await dispatch({
+      type: GET_PRODUCTS,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error getProducts', error);
+  }
 };
 
+
 export const getCategories = () => async dispatch => {
-  dispatch({
-    type: GET_CATEGORIES,
-    payload: categories,
-  });
+  const url = `${Constants.URL.wc}products/categories?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try{
+    let response = await axios.get(url);
+    // console.log('response getProducts', response.data[0]);
+    await dispatch({
+      type: GET_CATEGORIES,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error getCategories', error);
+  }
+};
+
+export const getProductsByCategory = (categoryId) => async dispatch => {
+  const url = `${Constants.URL.wc}products?category=${categoryId}&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try{
+    let response = await axios.get(url);
+    // console.log('response getProducts', response.data[0]);
+    await dispatch({
+      type: GET_CATEGORIES,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error getCategories', error);
+  }
+};
+
+export const getProductById = (productId) => async dispatch => {
+  const url = `${Constants.URL.wc}products/${productId}?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try{
+    let response = await axios.get(url);
+    // console.log('response getProducts', response.data[0]);
+    await dispatch({
+      type: GET_PRODUCTS,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error getproductbyid', error);
+  }
+};
+
+export const getReviewsOfProduct = (productId) => async dispatch => {
+  const url = `${Constants.URL.wc}products/${productId}/reviews?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try{
+    let response = await axios.get(url);
+    // console.log('response getReviews', response.data[0]);
+    await dispatch({
+      type: GET_REVIEWS,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error getReviews', error);
+  }
 };
 
 export const addToCart = item => async dispatch => {
   try {
-    console.log('in addtoCart app actions', item,typeof dispatch);
+    console.log('in addtoCart app actions', item, typeof dispatch);
 
     await dispatch({
       type: ADD_TO_CART,
@@ -39,14 +103,13 @@ export const addToCart = item => async dispatch => {
   } catch (error) {
     console.log('error', error);
   }
-  
 };
-export const removeItem = (item,id) => async dispatch => {
-  console.log('in remove items app action', id)
+export const removeItem = (item, id) => async dispatch => {
+  console.log('in remove items app action', id);
   dispatch({
     type: REMOVE_FROM_CART,
     payload: item,
-    index:id
+    index: id,
   });
 };
 export const emptyCart = () => async dispatch => {
