@@ -8,7 +8,8 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   EMPTY_CART,
-  GET_REVIEWS
+  GET_REVIEWS,
+  GET_PRODUCT_VARIATIONS
 } from './ActionTypes';
 import axios from 'axios';
 import {categories} from '../shared/Categories';
@@ -76,6 +77,21 @@ export const getProductById = (productId) => async dispatch => {
   }
 };
 
+export const getProductVariations = (productId) => async dispatch => {
+  const url = `${Constants.URL.wc}products/${productId}/variations?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try{
+    let response = await axios.get(url);
+    // console.log('response getProducts', response.data[0]);
+    await dispatch({
+      type: GET_PRODUCT_VARIATIONS,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error get product variation', error);
+  }
+};
+
 export const getReviewsOfProduct = (productId) => async dispatch => {
   const url = `${Constants.URL.wc}products/${productId}/reviews?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
   try{
@@ -90,6 +106,38 @@ export const getReviewsOfProduct = (productId) => async dispatch => {
     console.log('error getReviews', error);
   }
 };
+
+export const signup = (body) => async (dispatch) => {
+  const url = `${Constants.URL.wc}customers?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try {
+    console.log('in signup', body);
+    let response = await axios.post(url, body);
+    console.log('in signup got response', response);
+    await dispatch({
+      type: SIGNUP_USER,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error signup', error);
+  }
+};
+
+// export const signin = (body) => async (dispatch) => {
+//   const url = `${Constants.URL.wc}customers?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+//   try {
+//     console.log('in signup', body);
+//     let response = await axios.post(url, body);
+//     console.log('in signup got response', response);
+//     await dispatch({
+//       type: SIGNUP_USER,
+//       payload: response.data,
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.log('error signup', error);
+//   }
+// };
 
 export const addToCart = item => async dispatch => {
   try {
@@ -124,68 +172,9 @@ export const addOrder = data => async dispatch => {
     payload: data,
   });
 };
-// export const login = (body) => async (dispatch) => {
-//   try {
-//     // console.log('in Login', body);
-//     // let response = await axios.post(`${URL}${loginRoute}`, body);
-//     // console.log('response', response.data);
 
-//     await dispatch({
-//       type: SIGNIN_USER,
-//       payload: response.data.result,
-//     });
-//     return response.data.result;
-//   } catch (error) {
-//     console.log('error signin', error);
-//     if (error?.response?.data?.result) {
-//       console.log('error123 signin : ', error.response.data);
-//       return {error: error.response.data.result};
-//     }
-//   }
-// };
-
-// export const signup = (body) => async (dispatch) => {
-//   try {
-//     console.log('in authActions in function', body);
-//     let response = await axios.post(`${URL}${signupRoute}`, body);
-//     console.log('in authActions got response', response);
-
-//     await dispatch({
-//       type: SIGNUP_USER,
-//       payload: response.data.result,
-//     });
-
-//     return response.data.result;
-//   } catch (error) {
-//     if (error?.response?.data?.result) {
-//       console.log('error123 signin : ', error.response.data);
-//       return {error: error.response.data.result};
-//     }
-//   }
-// };
-
-// export const verifyCNIC = async (body) => {
-//   try {
-//     console.log('in authActions in verifyCNIC', body);
-//     let response = await axios.post(`${URL}${verifyCNICRoute}`, body);
-//     console.log('in authActions got response verifyCNIC', response);
-
-//     // await dispatch({
-//     //   type: VERIFY_CNIC,
-//     //   payload: response.data.result,
-//     // });
-
-//     return response.data;
-//   } catch (error) {
-//     if (error?.response?.data?.result) {
-//       console.log('error123 Route : ', error.response.data);
-//       return {error: error.response.data.result};
-//     }
-//   }
-// };
-
-// export const logout = () => async (dispatch) => {
-//   dispatch({
-//     type: CLEAR_USER,
-//   });
-// };
+export const logout = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_USER,
+  });
+};

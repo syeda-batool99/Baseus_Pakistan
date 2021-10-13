@@ -18,13 +18,12 @@ const Contact = () => {
         <View style={styles.box}>
           <Text style={styles.subheading}>For Any Query Or Complains</Text>
           <View style={{flexDirection: 'row'}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23} />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 320 7862032');
               }}
               style={styles.data}>
-              {' '}
               +92 320 7862032
             </Text>
           </View>
@@ -35,33 +34,31 @@ const Contact = () => {
             <MaterialCommunityIcons
               name="office-building"
               size={23}
-              color={Colors.LightGray}
+              
             />
-            <Text style={styles.data}> Office Timings Only</Text>
+            <Text style={styles.data}>Office Timings Only</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialCommunityIcons name="clock" size={23} color={Colors.LightGray} />
-            <Text style={styles.data}> 09:00 AM - 05:00 PM</Text>
+            <MaterialCommunityIcons name="clock" size={23}  />
+            <Text style={styles.data}>09:00 AM - 05:00 PM</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:042 37234116');
               }}
               style={styles.data}>
-              {' '}
               042 37234116
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 300 9411000');
               }}
               style={styles.data}>
-              {' '}
               +92 300 9411000
             </Text>
           </View>
@@ -72,44 +69,42 @@ const Contact = () => {
             <MaterialCommunityIcons
               name="office-building"
               size={23}
-              color={Colors.LightGray}
+              
             />
-            <Text style={styles.data}> Shop # 23-24, 1st Floor, Hassan Centre, Hall Road Lahore, Pakistan.</Text>
+            <Text style={styles.data}>Shop # 23-24, 1st Floor, Hassan Centre, Hall Road Lahore, Pakistan.</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <FontAwesome name="envelope" size={21} color={Colors.LightGray} />
+            <FontAwesome name="envelope" size={21}  />
             <Text
               onPress={() => {
                 Linking.openURL('mailto:info@baseus.com.pk');
               }}
               style={styles.data}>
-              {' '}
+                {' '}
               info@baseus.com.pk
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-          <MaterialCommunityIcons name="clock" size={23} color={Colors.LightGray} />
-            <Text style={styles.data}> 11:00 AM - 08:00 PM</Text>
+          <MaterialCommunityIcons name="clock" size={23}  />
+            <Text style={styles.data}>11:00 AM - 08:00 PM</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:042 37116660');
               }}
               style={styles.data}>
-              {' '}
               042 37116660
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 322 4274068');
               }}
               style={styles.data}>
-              {' '}
               +92 322 4274068
             </Text>
           </View>
@@ -120,12 +115,12 @@ const Contact = () => {
             <MaterialCommunityIcons
               name="office-building"
               size={23}
-              color={Colors.LightGray}
+              
             />
-            <Text style={styles.data}> Shop # 20-C Ground Floor Goldcrest Mall DHA Phase 4 Lahore, Pakistan.</Text>
+            <Text style={styles.data}>Shop # 20-C Ground Floor Goldcrest Mall DHA Phase 4 Lahore, Pakistan.</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <FontAwesome name="envelope" size={21} color={Colors.LightGray} />
+            <FontAwesome name="envelope" size={21}  />
             <Text
               onPress={() => {
                 Linking.openURL('mailto:info@baseus.com.pk');
@@ -136,28 +131,26 @@ const Contact = () => {
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-          <MaterialCommunityIcons name="clock" size={23} color={Colors.LightGray} />
-            <Text style={styles.data}> 11:00 AM - 10:00 PM</Text>
+          <MaterialCommunityIcons name="clock" size={23}  />
+            <Text style={styles.data}>11:00 AM - 10:00 PM</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 301 4757191');
               }}
               style={styles.data}>
-              {' '}
               +92 301 4757191
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 321 8411864');
               }}
               style={styles.data}>
-              {' '}
               +92 321 8411864
             </Text>
           </View>
@@ -168,12 +161,12 @@ const Contact = () => {
             <MaterialCommunityIcons
               name="office-building"
               size={23}
-              color={Colors.LightGray}
+              
             />
-            <Text style={styles.data}> CSD Shoping Complex, Aziz Bhatti Road Sarwar Colony Lahore, Pakistan.</Text>
+            <Text style={styles.data}>CSD Shoping Complex, Aziz Bhatti Road Sarwar Colony Lahore, Pakistan.</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <FontAwesome name="envelope" size={21} color={Colors.LightGray} />
+            <FontAwesome name="envelope" size={21}  />
             <Text
               onPress={() => {
                 Linking.openURL('mailto:info@baseus.com.pk');
@@ -184,28 +177,26 @@ const Contact = () => {
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-          <MaterialCommunityIcons name="clock" size={23} color={Colors.LightGray} />
-            <Text style={styles.data}> 11:00 AM - 10:00 PM</Text>
+          <MaterialCommunityIcons name="clock" size={23}  />
+            <Text style={styles.data}>11:00 AM - 10:00 PM</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 322 4114829');
               }}
               style={styles.data}>
-              {' '}
               +92 322 4114829
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 324 4065004');
               }}
               style={styles.data}>
-              {' '}
               +92 324 4065004
             </Text>
           </View>
@@ -216,12 +207,12 @@ const Contact = () => {
             <MaterialCommunityIcons
               name="office-building"
               size={23}
-              color={Colors.LightGray}
+              
             />
-            <Text style={styles.data}> Ground Floor DHA Phase 2, 12 - Haly Tower Lahore, Pakistan.</Text>
+            <Text style={styles.data}>Ground Floor DHA Phase 2, 12 - Haly Tower Lahore, Pakistan.</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <FontAwesome name="envelope" size={21} color={Colors.LightGray} />
+            <FontAwesome name="envelope" size={21}  />
             <Text
               onPress={() => {
                 Linking.openURL('mailto:info@baseus.com.pk');
@@ -232,28 +223,26 @@ const Contact = () => {
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-          <MaterialCommunityIcons name="clock" size={23} color={Colors.LightGray} />
-            <Text style={styles.data}> 11:00 AM - 10:00 PM</Text>
+          <MaterialCommunityIcons name="clock" size={23}  />
+            <Text style={styles.data}>11:00 AM - 10:00 PM</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray}/>
+            <MaterialIcons name="call" size={23} />
             <Text
               onPress={() => {
                 Linking.openURL('tel:042 32020243');
               }}
               style={styles.data}>
-              {' '}
               042 32020243
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 300 9481343');
               }}
               style={styles.data}>
-              {' '}
               +92 300 9481343
             </Text>
           </View>
@@ -264,12 +253,12 @@ const Contact = () => {
             <MaterialCommunityIcons
               name="office-building"
               size={23}
-              color={Colors.LightGray}
+              
             />
-            <Text style={styles.data}> 733-B Linked Baba Sports. Tipu Chowk Main Market Satellite Town Gujranwala, Pakistan.</Text>
+            <Text style={styles.data}>733-B Linked Baba Sports. Tipu Chowk Main Market Satellite Town Gujranwala, Pakistan.</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <FontAwesome name="envelope" size={21} color={Colors.LightGray} />
+            <FontAwesome name="envelope" size={21}  />
             <Text
               onPress={() => {
                 Linking.openURL('mailto:info@baseus.com.pk');
@@ -280,17 +269,16 @@ const Contact = () => {
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-          <MaterialCommunityIcons name="clock" size={23} color={Colors.LightGray} />
-            <Text style={styles.data}> 11:00 AM - 10:00 PM</Text>
+          <MaterialCommunityIcons name="clock" size={23}  />
+            <Text style={styles.data}>11:00 AM - 10:00 PM</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 5}}>
-            <MaterialIcons name="call" size={23} color={Colors.LightGray} />
+            <MaterialIcons name="call" size={23}  />
             <Text
               onPress={() => {
                 Linking.openURL('tel:+92 345 6541991');
               }}
               style={styles.data}>
-              {' '}
               +92 345 6541991
             </Text>
           </View>
@@ -407,7 +395,8 @@ const styles = StyleSheet.create({
   },
   box:{
     marginTop:30,
-    backgroundColor:Colors.LightYellow,
+    borderColor:Colors.LightGray,
+    borderWidth:1,
     borderBottomLeftRadius:30,
     borderBottomRightRadius:30,
     borderTopLeftRadius:12,

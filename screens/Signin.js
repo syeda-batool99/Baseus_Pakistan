@@ -4,7 +4,7 @@ import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
-const GuestAccount = (props) => {
+const Signin = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     return(
         <View>
@@ -96,17 +96,25 @@ const GuestAccount = (props) => {
                         />
                       </View>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 10,
-                      }}>
-                      <TouchableOpacity
-                        onPress={props.handleSubmit}
+                    <View>
+                    <TouchableOpacity
+                        onPress={props.MainProps.handleSubmit}
                         style={styles.btnContainer}>
                         <Text style={styles.button}>LOG IN</Text>
                       </TouchableOpacity>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignSelf:'center',
+                        marginTop: 20,
+                      }}>
+                      <TouchableOpacity 
+                      onPress={() => props.MainProps.navigation.navigate("Register")}
+                      >
+                        <Text style={styles.forgotText}>Create Account</Text>
+                      </TouchableOpacity>
+                      <Text style={{paddingHorizontal:10}}> | </Text>
                       <TouchableOpacity onPress={() => setModalVisible(true)}>
                         <Text style={styles.forgotText}>Forgot Password?</Text>
                       </TouchableOpacity>
@@ -116,69 +124,7 @@ const GuestAccount = (props) => {
               </Formik>
             </View>
           </View>
-          <View style={styles.box}>
-            <Text style={{ fontSize: 22, marginHorizontal: 20}}>
-              Register
-            </Text>
-            <View style={{margin: 15}}>
-              <Formik
-                initialValues={{email: '', password: '', number: ''}}
-                onSubmit={(values, actions) => {
-                  console.log(values);
-                }}>
-                {propss => (
-                  <View>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        alignContent: 'space-around',
-                      }}>
-                      <View style={{marginBottom: 7}}>
-                        <TextInput
-                          style={styles.input}
-                          placeholder=" Email"
-                          placeholderTextColor={Colors.LightGray}
-                          onChangeText={propss.handleChange('email')}
-                          value={propss.values.email}
-                          onBlur={propss.handleBlur('email')}
-                        />
-                      </View>
-                      <View style={{marginBottom: 7}}>
-                        <TextInput
-                          style={styles.input}
-                          placeholder=" Password"
-                          placeholderTextColor={Colors.LightGray}
-                          onChangeText={propss.handleChange('password')}
-                          value={propss.values.password}
-                          onBlur={propss.handleBlur('password')}
-                          type="password"
-                          secureTextEntry={true}
-                          autoCompleteType="password"
-                        />
-                      </View>
-                      <View style={{marginBottom: 7}}>
-                        <TextInput
-                          style={styles.input}
-                          placeholder=" Phone Number"
-                          placeholderTextColor={Colors.LightGray}
-                          onChangeText={propss.handleChange('number')}
-                          value={propss.values.number}
-                          onBlur={propss.handleBlur('number')}
-                        />
-                      </View>
-                    </View>
-                    <View style={{marginTop: 10}}>
-                      <TouchableOpacity
-                        onPress={props.handleSubmit}
-                        style={styles.btnContainer}>
-                        <Text style={styles.button}>REGISTER</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                )}
-              </Formik>
-            </View>
-          </View>
+          
         </View>
     )
 }
@@ -189,7 +135,7 @@ const styles = StyleSheet.create({
         borderColor: '#ececec',
         borderWidth: 1,
         borderRadius: 8,
-        // color: 'white',
+        color: 'black',
       },
       button: {
         backgroundColor: Colors.Yellow,
@@ -199,11 +145,11 @@ const styles = StyleSheet.create({
         padding: 10,
       },
       btnContainer: {
-        width: '50%',
+        width: '100%',
       },
       forgotText: {
         color: Colors.Olive,
-        padding: 10,
+        letterSpacing:1
       },
       box: {
         borderWidth: 1,
@@ -247,4 +193,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default GuestAccount;
+export default Signin;

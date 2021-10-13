@@ -42,7 +42,7 @@ const Shop = props => {
               item,
             });
           }}>
-          <View style={{width: 100, marginRight: 35}}>
+          <View style={{width: 100, marginHorizontal:12}}>
             <Image
               source={{ uri: item.images[0].src }}
               style={{
@@ -85,7 +85,7 @@ const Shop = props => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{marginBottom: 15, width: 100}}
+          style={{marginBottom: 15, width: 100, marginHorizontal:12}}
           onPress={() => props.AddToCart(item)}>
           <Text
             style={{
@@ -109,7 +109,7 @@ const Shop = props => {
       return p.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
     console.log('query', query, SearchedProduct.length);
-    setShowProducts(SearchedProduct);
+    setProducts(SearchedProduct);
   };
 
   return (
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   container: {
     // marginVertical: 0,
-    paddingHorizontal: 5,
+    // paddingHorizontal: 5,
   },
   heading: {
     // color: 'white',

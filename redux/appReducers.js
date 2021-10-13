@@ -1,9 +1,10 @@
-import {GET_CATEGORIES, GET_PRODUCTS, GET_REVIEWS} from './ActionTypes';
+import {GET_CATEGORIES, GET_PRODUCTS, GET_REVIEWS, GET_PRODUCT_VARIATIONS} from './ActionTypes';
 
 const initialState = {
   Products: [],
   Categories: [],
-  Reviews: []
+  Reviews: [], 
+  ProductVariations: []
 };
 
 export default function (state = initialState, action) {
@@ -27,6 +28,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
       Reviews: action.payload
+        
+      };
+      case GET_PRODUCT_VARIATIONS:
+      // console.log('action.payload', action.payload);
+      return {
+        ...state,
+      ProductVariations: action.payload
         
       };
     default:

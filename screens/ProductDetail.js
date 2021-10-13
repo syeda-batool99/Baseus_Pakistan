@@ -19,14 +19,33 @@ import {
   addToCart,
   getProductById,
   getReviewsOfProduct,
+  getProductVariations
 } from '../redux/appActions';
+import HTMLView from 'react-native-htmlview';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const ProductDetail = props => {
   const item = props.route.params.item;
   const [Reviews, setReviews] = useState([]);
+  const [Variations, setVariations] = useState([]);
+  const [Attributes, setAttributes] = useState([])
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState();
+  // const settingAttributes = (att) => {
+  //   setAttributes(att)
+  // }
+  // Variations.map((attribute) =>{
+  //   console.log('att', attribute.attributes);
+  //   settingAttributes(attribute.attributes)
+  // })
+
+  
+
+
 
   async function temp() {
     setReviews(await props.GetReviews(item.id));
+    setVariations(await props.GetProductVariation(item.id));
   }
   useEffect(() => {
     temp();
@@ -94,7 +113,11 @@ const ProductDetail = props => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{uri: item.images[0].src}} style={styles.imageStyle} />
+        <Image
+          source={{uri: item.images[0].src}}
+          style={styles.imageStyle}
+          resizeMode={'cover'}
+        />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
@@ -116,23 +139,67 @@ const ProductDetail = props => {
             totalWidth={200}
             totalHeight={40}
             valueType="real"
-            minValue={0}
+            minValue={1}
             rounded
             // textColor="white"
             separatorWidth={0}
-            iconStyle={{color: 'white'}}
+            iconStyle={{color: 'black'}}
             containerStyle={{marginVertical: 10}}
-            rightButtonBackgroundColor={Colors.Olive}
-            leftButtonBackgroundColor={Colors.Olive}
+            rightButtonBackgroundColor={Colors.LightYellow}
+            leftButtonBackgroundColor={Colors.LightYellow}
           />
         </View>
+        {item.attributes.length > 0 && (
+          <View>
+            {/* {item.attributes[0].options.map((item,i) => console.log("item", item))} */}
+            <DropDownPicker
+              // items={item.attributes[0].options.map((item) => ({
+              //   label: item,
+              //   value: item,
+              // }))}
+              open={open}
+              value={value}
+              items={Attributes}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setAttributes}
+              placeholder={item.attributes[0].name}
+              defaultValue={item.attributes[0].options[0]}
+              // style={{
+              //   backgroundColor: '#fafafa',
+              //   borderColor: '#D2D2D2',
+              //   borderWidth: 1,
+              //   borderRadius: 10,
+              // }}
+              // itemStyle={{
+              //   justifyContent: 'flex-start',
+              // }}
+              dropDownStyle={{backgroundColor: Colors.Yellow}}
+              // onChangeItem={
+              //   (item) => setSelectedServices(item)
+              // }
+            />
+            <View></View>
+          </View>
+        )}
 
-        <Text
+        <HTMLView value={item.description} />
+
+        {/* <WebView 
+        style={
+          item.description ? styles.itemDescription : {display: 'none'}
+        }
+        originWhitelist={['*']}
+        contentMode='mobile'
+        containerStyle={{backgroundColor:'black'}}
+        source={{ html: '<p>Here I am</p>' }} /> */}
+
+        {/* <Text
           style={
-            item.short_description ? styles.itemDescription : {display: 'none'}
+            item.description ? styles.itemDescription : {display: 'none'}
           }>
-          {item.short_description}
-        </Text>
+          {item.description}
+        </Text> */}
 
         <View style={styles.horizontalLine}></View>
         {/* <View>
@@ -213,11 +280,14 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: 250,
+    width: 250,
+    alignSelf: 'center',
   },
   imageStyle: {
     width: '100%',
     height: '100%',
     borderRadius: 10,
+    alignSelf: 'center',
   },
   textContainer: {
     marginVertical: 15,
@@ -228,18 +298,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   itemPrice: {
-    color: Colors.Olive,
+    color: Colors.VeryDarkGray,
     fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 5,
   },
-  itemDescription: {
-    color: 'black',
-    fontSize: 17,
-    marginVertical: 10,
-    lineHeight: 22,
-    // letterSpacing: 1,
-  },
+  // itemDescription: {
+  //   color: 'black',
+
+  // },
   itemCategory: {
     // color: 'white',
     fontSize: 15,
@@ -247,13 +314,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     alignContent: 'center',
-    backgroundColor: Colors.Olive,
+    backgroundColor: Colors.LightYellow,
     padding: 12,
     borderRadius: 10,
     right: 5,
   },
   buttonText: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontWeight: '700',
   },
@@ -305,6 +372,7 @@ const mapDispatchToProps = dispatch => {
     AddToCart: body => dispatch(addToCart(body)),
     GetProducts: productId => dispatch(getProductById(productId)),
     GetReviews: productId => dispatch(getReviewsOfProduct(productId)),
+    GetProductVariation : productId => dispatch(getProductVariations(productId))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

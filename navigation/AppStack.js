@@ -20,6 +20,7 @@ import Cart from '../screens/Cart';
 import {connect} from 'react-redux';
 import ShoppingcartItem from '../screens/ShoppingcartItem';
 import Checkout from '../screens/Checkout';
+import Register from '../screens/Register';
 // import Icon from 'react-native-vector-icons';
 
 const HomeStack = createStackNavigator();
@@ -108,7 +109,7 @@ const AppStack = props => {
         />
         <Tab.Screen
           name="Account"
-          component={Account}
+          component={AccountStack}
           options={{
             tabBarIcon: ({focused}) => (
               <FontAwesome5
@@ -133,6 +134,19 @@ const AppStack = props => {
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Checkout" component={Checkout} />
+
+      </Stack.Navigator>
+    );
+  };
+
+  const AccountStack = () => {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Account" component={Account} />
+        <Stack.Screen name="Register" component={Register} />
 
       </Stack.Navigator>
     );

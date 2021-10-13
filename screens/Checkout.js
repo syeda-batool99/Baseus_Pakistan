@@ -24,13 +24,16 @@ const Checkout = () => {
           initialValues={{
             firstName: '',
             lastName: '',
-            Country: '',
-            StreetAddress: '',
-            City: '',
-            State: '',
-            Phone: '',
-            Email: '',
-            OrderNotes: '',
+            country: '',
+            streetAddress: '',
+            city: '',
+            state: '',
+            phone: '',
+            email: '',
+            orderNotes: '',
+            PaymentMethod: 'cod',
+            PaymentMethodTitle:'Cash on Delivery', 
+            lineItems:[]
           }}
           onSubmit={(values, actions) => {
             console.log(values);
@@ -73,7 +76,7 @@ const Checkout = () => {
                     placeholder=" Country"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('country')}
-                    value={propss.values.Country}
+                    value={propss.values.country}
                     onBlur={propss.handleBlur('country')}
                   />
                 </View>
@@ -84,7 +87,7 @@ const Checkout = () => {
                     placeholder=" House number, Apartment, street name"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('StreetAddress')}
-                    value={propss.values.StreetAddress}
+                    value={propss.values.streetAddress}
                     onBlur={propss.handleBlur('StreetAddress')}
                   />
                 </View>
@@ -94,7 +97,7 @@ const Checkout = () => {
                     placeholder=" City"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('city')}
-                    value={propss.values.City}
+                    value={propss.values.city}
                     onBlur={propss.handleBlur('city')}
                   />
                 </View>
@@ -104,7 +107,7 @@ const Checkout = () => {
                     placeholder=" State"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('state')}
-                    value={propss.values.State}
+                    value={propss.values.state}
                     onBlur={propss.handleBlur('state')}
                   />
                 </View>
@@ -114,7 +117,7 @@ const Checkout = () => {
                     placeholder=" Phone"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('phone')}
-                    value={propss.values.Phone}
+                    value={propss.values.phone}
                     onBlur={propss.handleBlur('phone')}
                   />
                 </View>
@@ -124,7 +127,7 @@ const Checkout = () => {
                     placeholder=" Email Address"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('email')}
-                    value={propss.values.Email}
+                    value={propss.values.email}
                     onBlur={propss.handleBlur('email')}
                   />
                 </View>
@@ -135,7 +138,7 @@ const Checkout = () => {
                     placeholder=" Order Notes (optional)"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('notes')}
-                    value={propss.values.OrderNotes}
+                    value={propss.values.orderNotes}
                     onBlur={propss.handleBlur('notes')}
                   />
                 </View>
@@ -185,11 +188,11 @@ const styles = StyleSheet.create({
     width: '50%',
   },
   input: {
-    backgroundColor: 'transparent',
+    // backgroundColor: 'transparent',
     borderColor: '#ececec',
     borderWidth: 1,
     borderRadius: 8,
-    color: 'white',
+    color: 'black',
   },
 });
 

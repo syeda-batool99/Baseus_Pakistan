@@ -52,7 +52,7 @@ const Home = props => {
             item,
           });
         }}>
-        <Image source={item.image} style={styles.categoryImage} />
+        <Image source={{uri: item.image.src}} style={styles.categoryImage} />
         <Text style={styles.categoryTitle}>{item.name}</Text>
       </TouchableOpacity>
     );
@@ -70,7 +70,7 @@ const Home = props => {
             item,
           });
         }}>
-        <View style={{width: 100, marginRight: 35}}>
+        <View style={{width: 100, marginHorizontal:12}}>
           <Image source={{ uri: item.images[0].src }} style={styles.productImage} />
           <Text
             // adjustsFontSizeToFit= {true}
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 20,
     marginVertical: 10,
-    paddingHorizontal: 5,
+    // paddingHorizontal: 5,
   },
   subtitleContainer: {
     marginTop: 8,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     // color: 'white',
     fontWeight: 'bold',
-    width: 100,
+    width: 80,
     textAlign: 'center',
   },
   productImage: {

@@ -12,30 +12,25 @@ import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import UserAccount from './UserAccount';
-import GuestAccount from './GuestAccount';
+import Signin from './Signin'
+import {connect} from 'react-redux';
+import {logout} from '../redux/appActions';
 
 const Account = props => {
- 
-  const [login, setLogin] = useState(false);
-
-  const handleSubmit = () => {
-    props.navigation.navigate('Home');
-    setLogin(true);
-  };
 
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.heading}>My Account</Text>
-      {login ? (
+      <Text style={styles.heading}>Welcome to Baseus Pakistan</Text>
+      {props.user ? (
         <View>
           <TouchableOpacity style={{alignSelf:'center'}}
-          onPress={() => setLogin(false)}>
+          onPress={() => props.signout()}>
           <Text style={{ fontSize:18}}> Signout</Text>
           </TouchableOpacity>
-          <UserAccount login={login}/>
+          <UserAccount user={props.user}/>
         </View>
       ) : (
-        <GuestAccount handleSubmit={handleSubmit}/>
+        <Signin MainProps={props}/>
       )}
     </ScrollView>
   );
@@ -52,9 +47,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     textAlign: 'center',
-    marginVertical: 10,
+    marginVertical: 30,
   },
   
 });
 
-export default Account;
+const mapStateToProps = state => ({
+  user: state.userDetails.user,
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signout: () => dispatch(logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

@@ -3,8 +3,7 @@ import {SIGNIN_USER, SIGNUP_USER, CLEAR_USER,GET_CATEGORIES, GET_PRODUCTS} from 
 const initialState = {
   user: null,
   isloggedIn: false,
-  token: null,
-  userType: '',
+  role: '',
 };
 
 export default function (state = initialState, action) {
@@ -12,20 +11,18 @@ export default function (state = initialState, action) {
     case SIGNUP_USER:
       return {
         ...state,
-        user: action.payload.userCreated,
-        token: action.payload.token,
+        user: action.payload,
         isloggedIn: true,
-        userType: action.payload.userCreated.userType,
+        userType: action.payload.role,
         
       };
     case SIGNIN_USER:
       console.log('action.payload', action.payload);
       return {
         ...state,
-        user: action.payload.userExist,
-        userType: action.payload.userType,
-        token: action.payload.token,
+        user: action.payload,
         isloggedIn: true,
+        userType: action.payload.role,
         
       };
     case CLEAR_USER:
@@ -33,9 +30,7 @@ export default function (state = initialState, action) {
         ...state,
         user: null,
         isloggedIn: false,
-        token: null,
         userType: undefined,
-       
       };
     default:
       return state;
