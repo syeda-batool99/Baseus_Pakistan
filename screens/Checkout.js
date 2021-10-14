@@ -25,12 +25,12 @@ const Checkout = () => {
             firstName: '',
             lastName: '',
             country: '',
-            streetAddress: '',
+            address: '',
             city: '',
             state: '',
             phone: '',
             email: '',
-            orderNotes: '',
+            notes: '',
             PaymentMethod: 'cod',
             PaymentMethodTitle:'Cash on Delivery', 
             lineItems:[]
@@ -86,9 +86,9 @@ const Checkout = () => {
                     style={[styles.input, {height: 80}]}
                     placeholder=" House number, Apartment, street name"
                     placeholderTextColor={Colors.LightGray}
-                    onChangeText={propss.handleChange('StreetAddress')}
-                    value={propss.values.streetAddress}
-                    onBlur={propss.handleBlur('StreetAddress')}
+                    onChangeText={propss.handleChange('address')}
+                    value={propss.values.address}
+                    onBlur={propss.handleBlur('address')}
                   />
                 </View>
                 <View style={{marginBottom: 7}}>
@@ -138,7 +138,7 @@ const Checkout = () => {
                     placeholder=" Order Notes (optional)"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('notes')}
-                    value={propss.values.orderNotes}
+                    value={propss.values.notes}
                     onBlur={propss.handleBlur('notes')}
                   />
                 </View>

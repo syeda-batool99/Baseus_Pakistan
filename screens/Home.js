@@ -70,7 +70,7 @@ const Home = props => {
             item,
           });
         }}>
-        <View style={{width: 100, marginHorizontal:12}}>
+        <View style={{width: 100, marginHorizontal:5}}>
           <Image source={{ uri: item.images[0].src }} style={styles.productImage} />
           <Text
             // adjustsFontSizeToFit= {true}

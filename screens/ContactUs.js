@@ -374,13 +374,13 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   subheading: {fontSize: 22, marginBottom: 10, fontWeight:'bold', textAlign:'center'},
-  data: {fontSize: 18,  width:'90%'},
+  data: {fontSize: 18, marginHorizontal:10},
   input:{
-      backgroundColor:'transparent',
+      // backgroundColor:'transparent',
       borderColor:'#ececec',
       borderWidth:1,
       borderRadius:8,
-      // color:'white'
+      color:'black'
   },
   button:{
     backgroundColor: Colors.Yellow,

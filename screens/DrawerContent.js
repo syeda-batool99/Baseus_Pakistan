@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View, Image, Linking} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {
   Title,
@@ -87,11 +87,9 @@ const DrawerContent = props => {
               )}
               label="About Us"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-              //   onPress={() =>
-              //     props.navigation.navigate('SellerOffers', {
-              //       // ...props.route.params,
-              //     })
-              //   }
+              onPress={() => {
+                Linking.openURL('https://baseus.com.pk/about-us/');
+              }}
             />
             <DrawerItem
               icon={({color}) => (
@@ -115,11 +113,11 @@ const DrawerContent = props => {
               )}
               label="Signin/Signup"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-              //   onPress={() =>
-              //     props.navigation.navigate('Profile', {
-              //       // ...props.route.params,
-              //     })
-              //   }
+                onPress={() =>
+                  props.navigation.navigate('Account', {
+                    // ...props.route.params,
+                  })
+                }
             />
           </Drawer.Section>
         </View>
