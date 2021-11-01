@@ -1,5 +1,5 @@
+/* eslint-disable prettier/prettier */
 import {
-  SIGNIN_USER,
   SIGNUP_USER,
   CLEAR_USER,
   GET_CATEGORIES,
@@ -9,16 +9,17 @@ import {
   REMOVE_FROM_CART,
   EMPTY_CART,
   GET_REVIEWS,
-  GET_PRODUCT_VARIATIONS
+  GET_PRODUCT_VARIATIONS,
+  GET_SEARCHED_PRODUCTS,
 } from './ActionTypes';
 import axios from 'axios';
-import {categories} from '../shared/Categories';
 import Constants from './Constants';
+import {Alert} from 'react-native';
 // import {URL, loginRoute, signupRoute, verifyCNICRoute} from '../config/const';
 
 export const getProducts = () => async dispatch => {
   const url = `${Constants.URL.wc}products?per_page=30&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
-  try{
+  try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);
     await dispatch({
@@ -31,10 +32,9 @@ export const getProducts = () => async dispatch => {
   }
 };
 
-
 export const getCategories = () => async dispatch => {
   const url = `${Constants.URL.wc}products/categories?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
-  try{
+  try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);
     await dispatch({
@@ -47,9 +47,9 @@ export const getCategories = () => async dispatch => {
   }
 };
 
-export const getProductsByCategory = (categoryId) => async dispatch => {
+export const getProductsByCategory = categoryId => async dispatch => {
   const url = `${Constants.URL.wc}products?category=${categoryId}&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
-  try{
+  try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);
     await dispatch({
@@ -62,9 +62,24 @@ export const getProductsByCategory = (categoryId) => async dispatch => {
   }
 };
 
-export const getProductById = (productId) => async dispatch => {
+export const getProductsBySearch = searchString => async dispatch => {
+  const url = `${Constants.URL.wc}products?search=${searchString}&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  try {
+    let response = await axios.get(url);
+    // console.log('response getProductsSearch', response.data);
+    await dispatch({
+      type: GET_SEARCHED_PRODUCTS,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error getSearchProducts', error);
+  }
+};
+
+export const getProductById = productId => async dispatch => {
   const url = `${Constants.URL.wc}products/${productId}?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
-  try{
+  try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);
     await dispatch({
@@ -77,9 +92,9 @@ export const getProductById = (productId) => async dispatch => {
   }
 };
 
-export const getProductVariations = (productId) => async dispatch => {
+export const getProductVariations = productId => async dispatch => {
   const url = `${Constants.URL.wc}products/${productId}/variations?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
-  try{
+  try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);
     await dispatch({
@@ -92,9 +107,9 @@ export const getProductVariations = (productId) => async dispatch => {
   }
 };
 
-export const getReviewsOfProduct = (productId) => async dispatch => {
+export const getReviewsOfProduct = productId => async dispatch => {
   const url = `${Constants.URL.wc}products/${productId}/reviews?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
-  try{
+  try {
     let response = await axios.get(url);
     // console.log('response getReviews', response.data[0]);
     await dispatch({
@@ -107,7 +122,22 @@ export const getReviewsOfProduct = (productId) => async dispatch => {
   }
 };
 
-export const signup = (body) => async (dispatch) => {
+// export const getCoupons = () => async dispatch => {
+//   const url = `${Constants.URL.wc}coupons?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+//   try {
+//     let response = await axios.get(url);
+//     // console.log('response getReviews', response.data[0]);
+//     await dispatch({
+//       type: GET_REVIEWS,
+//       payload: response.data,
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.log('error getCoupons', error);
+//   }
+// };
+
+export const signup = body => async dispatch => {
   const url = `${Constants.URL.wc}customers?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
   try {
     console.log('in signup', body);
@@ -119,7 +149,15 @@ export const signup = (body) => async (dispatch) => {
     });
     return response.data;
   } catch (error) {
-    console.log('error signup', error);
+    console.log('error signup', error.message);
+    Alert.alert('Error', 'This account already exists. Please Signin', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+    ]);
   }
 };
 
@@ -173,7 +211,7 @@ export const addOrder = data => async dispatch => {
   });
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async dispatch => {
   dispatch({
     type: CLEAR_USER,
   });

@@ -12,25 +12,22 @@ import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import UserAccount from './UserAccount';
-import Signin from './Signin'
+import Signin from './Signin';
 import {connect} from 'react-redux';
 import {logout} from '../redux/appActions';
 
 const Account = props => {
-
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.heading}>Welcome to Baseus Pakistan</Text>
       {props.user ? (
         <View>
-          <TouchableOpacity style={{alignSelf:'center'}}
-          onPress={() => props.signout()}>
-          <Text style={{ fontSize:18}}> Signout</Text>
-          </TouchableOpacity>
-          <UserAccount user={props.user}/>
+          <UserAccount user={props.user} />
         </View>
       ) : (
-        <Signin MainProps={props}/>
+        <View style={{marginVertical: 10}}>
+          <Text style={styles.heading}>Welcome to Baseus Pakistan</Text>
+          <Signin MainProps={props} />
+        </View>
       )}
     </ScrollView>
   );
@@ -49,7 +46,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 30,
   },
-  
 });
 
 const mapStateToProps = state => ({

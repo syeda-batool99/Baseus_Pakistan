@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
@@ -52,7 +53,7 @@ const Register = props => {
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
   });
   return (
-    <View style={{paddingHorizontal: 15}}>
+    <ScrollView style={{paddingHorizontal: 15}}>
       <Text style={styles.heading}>Welcome to Baseus Pakistan</Text>
       <View style={styles.box}>
         <Text style={{fontSize: 22, marginHorizontal: 20}}>Register</Text>
@@ -172,7 +173,7 @@ const Register = props => {
           </Formik>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     borderColor: '#ececec',
     borderWidth: 1,
     borderRadius: 8,
-    // color: 'white',
+    color: 'black',
   },
   errorInput: {
     height: 40,
@@ -193,6 +194,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEF8FF',
     // width: 302,
     padding: 10,
+    color: 'black',
     // paddingVertical: 0,
     fontSize: 16,
   },

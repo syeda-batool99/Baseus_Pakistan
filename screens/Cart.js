@@ -13,6 +13,7 @@ import * as Colors from '../assets/Colors/index';
 import {removeItem, emptyCart} from '../redux/appActions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import NumericInput from 'react-native-numeric-input';
+import {TextInput} from 'react-native-gesture-handler';
 
 const Cart = props => {
   const cartItemsRender = ({item}) => {
@@ -40,12 +41,12 @@ const Cart = props => {
             totalWidth={100}
             totalHeight={35}
             valueType="real"
-            minValue={0}
+            minValue={1}
             textColor="black"
             separatorWidth={0}
-            iconStyle={{color: 'white'}}
-            rightButtonBackgroundColor={Colors.Olive}
-            leftButtonBackgroundColor={Colors.Olive}
+            iconStyle={{color: 'black'}}
+            rightButtonBackgroundColor={Colors.LightYellow}
+            leftButtonBackgroundColor={Colors.LightYellow}
           />
         </View>
         {/* <View style={styles.ItemContainer2}>
@@ -76,43 +77,71 @@ const Cart = props => {
         renderItem={cartItemsRender}
         keyExtractor={item => item.id}
       />
-      {props.cartItems.length > 0 && <View>
-        <Text style={styles.subheading}>Cart Total</Text>
-      <View style={styles.cartItemsContainer}>
-        <View
-          style={[styles.ItemContainer2, {justifyContent: 'space-between'}]}>
-          <Text style={styles.subheading}>Subtotal: </Text>
-          <Text style={[styles.valueTotal, {right: 10}]}>
-            {' '}
-            Rs. {props.cartTotal}
-          </Text>
+      {props.cartItems.length > 0 && (
+        <View>
+          <Text style={styles.subheading}>Cart Total</Text>
+          <View style={styles.cartItemsContainer}>
+            <View
+              style={[
+                styles.ItemContainer2,
+                {justifyContent: 'space-between'},
+              ]}>
+              <Text style={styles.subheading}>Subtotal: </Text>
+              <Text style={[styles.valueTotal, {right: 10}]}>
+                {' '}
+                Rs. {props.cartTotal}
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.ItemContainer2,
+                {justifyContent: 'space-between'},
+              ]}>
+              <Text style={styles.subheading}>Shipping: </Text>
+              <Text
+                style={[
+                  styles.valueTotal,
+                  {right: 10, fontWeight: 'normal', fontSize: 14},
+                ]}>
+                {' '}
+                Rs. 200
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.ItemContainer2,
+                {justifyContent: 'space-between'},
+              ]}>
+              <Text style={[styles.subheading, {fontWeight: '500'}]}>
+                Coupon code:{' '}
+              </Text>
+              <TextInput style={styles.input} />
+              <TouchableOpacity
+                style={{alignSelf: 'center'}}
+                // onPress={() => props.navigation.navigate('Checkout')}
+              >
+                <Text style={styles.button}>Update</Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={[
+                styles.ItemContainer2,
+                {justifyContent: 'space-between'},
+              ]}>
+              <Text style={styles.subheading}>Cart Total: </Text>
+              <Text style={[styles.valueTotal, {right: 10}]}>
+                {' '}
+                Rs. {props.cartTotal + 200}
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity
+            style={styles.btnContainer}
+            onPress={() => props.navigation.navigate('Checkout')}>
+            <Text style={styles.button}>Proceed to Checkout</Text>
+          </TouchableOpacity>
         </View>
-        <View
-          style={[styles.ItemContainer2, {justifyContent: 'space-between'}]}>
-          <Text style={styles.subheading}>Shipping: </Text>
-          <Text
-            style={[
-              styles.valueTotal,
-              {right: 10, fontWeight: 'normal', fontSize: 14},
-            ]}>
-            {' '}
-            Rs. 200
-          </Text>
-        </View>
-        <View
-          style={[styles.ItemContainer2, {justifyContent: 'space-between'}]}>
-          <Text style={styles.subheading}>Cart Total: </Text>
-          <Text style={[styles.valueTotal, {right: 10}]}>
-            {' '}
-            Rs. {props.cartTotal + 200}
-          </Text>
-        </View>
-      </View>
-      <TouchableOpacity style={styles.btnContainer} onPress={() => props.navigation.navigate("Checkout")}>
-        <Text style={styles.button}>Proceed to Checkout</Text>
-      </TouchableOpacity>
-        </View>}
-      
+      )}
     </ScrollView>
   );
 };
@@ -137,7 +166,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   value: {
-    color: Colors.Olive,
+    color: Colors.VeryDarkGray,
     marginVertical: 12,
     width: '80%',
   },
@@ -176,7 +205,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   valueTotal: {
-    color: Colors.Olive,
+    color: Colors.VeryDarkGray,
     marginVertical: 12,
     fontSize: 16,
     fontWeight: 'bold',
@@ -190,8 +219,19 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     width: '50%',
-    alignSelf:'center',
-    marginVertical:10
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  input: {
+    backgroundColor: 'transparent',
+    borderColor: Colors.LightGray,
+    borderWidth: 1,
+    borderRadius: 8,
+    width: '30%',
+    height: '80%',
+    color: 'black',
+    paddingHorizontal: 10,
+    alignSelf: 'center',
   },
 });
 

@@ -1,4 +1,5 @@
-import {SIGNIN_USER, SIGNUP_USER, CLEAR_USER,GET_CATEGORIES, GET_PRODUCTS} from './ActionTypes';
+/* eslint-disable prettier/prettier */
+import {SIGNIN_USER, SIGNUP_USER, CLEAR_USER} from './ActionTypes';
 
 const initialState = {
   user: null,
@@ -14,7 +15,6 @@ export default function (state = initialState, action) {
         user: action.payload,
         isloggedIn: true,
         userType: action.payload.role,
-        
       };
     case SIGNIN_USER:
       console.log('action.payload', action.payload);
@@ -23,7 +23,6 @@ export default function (state = initialState, action) {
         user: action.payload,
         isloggedIn: true,
         userType: action.payload.role,
-        
       };
     case CLEAR_USER:
       return {

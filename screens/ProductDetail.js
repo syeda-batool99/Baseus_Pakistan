@@ -1,25 +1,25 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-shadow */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
   Text,
-  TouchableWithoutFeedback,
   ScrollView,
   FlatList,
-  SafeAreaView,
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {Button} from 'react-native-paper';
 import * as Colors from '../assets/Colors/index';
 import NumericInput from 'react-native-numeric-input';
-import {Rating, AirbnbRating} from 'react-native-ratings';
 import {connect} from 'react-redux';
 import {
   addToCart,
   getProductById,
   getReviewsOfProduct,
-  getProductVariations
+  getProductVariations,
 } from '../redux/appActions';
 import HTMLView from 'react-native-htmlview';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -28,28 +28,25 @@ const ProductDetail = props => {
   const item = props.route.params.item;
   const [Reviews, setReviews] = useState([]);
   const [Variations, setVariations] = useState([]);
-  const [Attributes, setAttributes] = useState([])
+  const [Attributes, setAttributes] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState();
-  // const settingAttributes = (att) => {
-  //   setAttributes(att)
-  // }
-  // Variations.map((attribute) =>{
-  //   console.log('att', attribute.attributes);
-  //   settingAttributes(attribute.attributes)
-  // })
 
-  
-
-
+  const settingAttributes = att => {
+    setAttributes(att);
+  };
+  Variations.map(attribute => {
+    console.log('att', attribute.attributes);
+    settingAttributes(attribute.attributes);
+  });
 
   async function temp() {
     setReviews(await props.GetReviews(item.id));
-    setVariations(await props.GetProductVariation(item.id));
+    // setVariations(await props.GetProductVariation(item.id));
   }
   useEffect(() => {
     temp();
-  }, []);
+  });
 
   let stars = [];
   for (var i = 1; i <= 5; i++) {
@@ -140,7 +137,10 @@ const ProductDetail = props => {
             totalHeight={40}
             valueType="real"
             minValue={1}
+            // value={1}
             rounded
+            // step={1}
+            // initValue={1}
             // textColor="white"
             separatorWidth={0}
             iconStyle={{color: 'black'}}
@@ -185,7 +185,7 @@ const ProductDetail = props => {
 
         <HTMLView value={item.description} />
 
-        {/* <WebView 
+        {/* <WebView
         style={
           item.description ? styles.itemDescription : {display: 'none'}
         }
@@ -214,7 +214,7 @@ const ProductDetail = props => {
         <View>
           <Text style={styles.heading}>Reviews</Text>
           <View style={styles.horizontalLine}></View>
-          {item.average_rating != '0.00' ? (
+          {item.average_rating !== '0.00' ? (
             <View>
               <Text
                 style={{
@@ -372,7 +372,7 @@ const mapDispatchToProps = dispatch => {
     AddToCart: body => dispatch(addToCart(body)),
     GetProducts: productId => dispatch(getProductById(productId)),
     GetReviews: productId => dispatch(getReviewsOfProduct(productId)),
-    GetProductVariation : productId => dispatch(getProductVariations(productId))
+    GetProductVariation: productId => dispatch(getProductVariations(productId)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

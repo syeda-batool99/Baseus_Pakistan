@@ -18,14 +18,14 @@ import {SliderBox} from 'react-native-image-slider-box';
 import * as Colors from '../assets/Colors/index';
 // import {getProducts} from '../shared/Products';
 import {connect} from 'react-redux';
-import {addToCart, getProducts, getCategories} from '../redux/appActions'
+import {addToCart, getProducts, getCategories} from '../redux/appActions';
 
 const Home = props => {
   const [ProductsFromApiCall, setProducts] = useState([]);
   const [Categories, setCategories] = useState([]);
   async function temp() {
-     setProducts(await props.GetProducts());
-     setCategories(await props.GetCategories())
+    setProducts(await props.GetProducts());
+    setCategories(await props.GetCategories());
   }
   const images = {
     images: [
@@ -37,7 +37,7 @@ const Home = props => {
   };
 
   useEffect(() => {
-    temp()
+    temp();
   }, []);
 
   const renderItem = item => <Item item={item.item} />;
@@ -70,8 +70,11 @@ const Home = props => {
             item,
           });
         }}>
-        <View style={{width: 100, marginHorizontal:5}}>
-          <Image source={{ uri: item.images[0].src }} style={styles.productImage} />
+        <View style={{width: 100, marginHorizontal: 8}}>
+          <Image
+            source={{uri: item.images[0].src}}
+            style={styles.productImage}
+          />
           <Text
             // adjustsFontSizeToFit= {true}
             // ellipsizeMode={'tail'}
@@ -80,7 +83,9 @@ const Home = props => {
             {item.name}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
-          <TouchableOpacity style={{marginBottom: 15}} onPress={()=>props.AddToCart(item)}>
+          <TouchableOpacity
+            style={{marginBottom: 15}}
+            onPress={() => props.AddToCart(item)}>
             <Text style={styles.addToCartBtn}>Add to cart </Text>
           </TouchableOpacity>
         </View>
@@ -112,7 +117,7 @@ const Home = props => {
         <View style={styles.subtitleContainer}>
           <Text style={styles.subtitle}>Products</Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Shop')}>
-            <Text 
+            <Text
               style={{
                 fontSize: 16,
                 // color: '#FFFFFF',
@@ -125,7 +130,7 @@ const Home = props => {
           <FlatList
             horizontal={false}
             numColumns={3}
-            data={ProductsFromApiCall.slice(0,6)}
+            data={ProductsFromApiCall.slice(0, 6)}
             renderItem={renderProduct}
             keyExtractor={item => item.id}
           />
@@ -182,11 +187,11 @@ const styles = StyleSheet.create({
   productName: {
     fontSize: 13,
     marginTop: 5,
-    marginLeft:12,
+    marginLeft: 12,
     // color: 'white',
     fontWeight: 'bold',
     // width: 100,
-    textAlign:'left'
+    textAlign: 'left',
     // height: 100,
   },
   productPrice: {
@@ -200,7 +205,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Yellow,
     textAlign: 'center',
     borderRadius: 20,
-    fontStyle: 'italic',
   },
 });
 
@@ -210,11 +214,11 @@ const mapStateToProps = state => ({
   categories: state.appData.Categories,
   // token: state.userDetails.token,
 });
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    AddToCart: (body) => dispatch(addToCart(body)),
-    GetProducts : () => dispatch(getProducts()),
-    GetCategories : () => dispatch(getCategories())
+    AddToCart: body => dispatch(addToCart(body)),
+    GetProducts: () => dispatch(getProducts()),
+    GetCategories: () => dispatch(getCategories()),
   };
 };
-export default connect(mapStateToProps,mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

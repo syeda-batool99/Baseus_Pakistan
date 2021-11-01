@@ -17,6 +17,8 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 // import {logout} from '../../redux/authActions';
 // import {connect} from 'react-redux';
 import * as Colors from '../assets/Colors/index';
+import {connect} from 'react-redux';
+import {logout} from '../redux/appActions';
 
 const DrawerContent = props => {
   return (
@@ -50,11 +52,11 @@ const DrawerContent = props => {
               )}
               label="Home"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-                onPress={() =>
-                  props.navigation.navigate('Home', {
-                    // ...props.route.params,
-                  })
-                }
+              onPress={() =>
+                props.navigation.navigate('Home', {
+                  // ...props.route.params,
+                })
+              }
             />
 
             <DrawerItem
@@ -63,11 +65,11 @@ const DrawerContent = props => {
               )}
               label="Shop"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-                onPress={() =>
-                  props.navigation.navigate('Shop', {
-                    // ...props.route.params,
-                  })
-                }
+              onPress={() =>
+                props.navigation.navigate('Shop', {
+                  // ...props.route.params,
+                })
+              }
             />
             <DrawerItem
               icon={({color}) => (
@@ -75,11 +77,11 @@ const DrawerContent = props => {
               )}
               label="Cart"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-                onPress={() =>
-                  props.navigation.navigate('Cart', {
-                    // ...props.route.params,
-                  })
-                }
+              onPress={() =>
+                props.navigation.navigate('Cart', {
+                  // ...props.route.params,
+                })
+              }
             />
             <DrawerItem
               icon={({color}) => (
@@ -97,28 +99,45 @@ const DrawerContent = props => {
               )}
               label="Contact Us"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-                onPress={() =>
-                  props.navigation.navigate('Contact', {
-                    // ...props.route.params,
-                  })
-                }
+              onPress={() =>
+                props.navigation.navigate('Contact', {
+                  // ...props.route.params,
+                })
+              }
             />
-            <DrawerItem
-              icon={({color}) => (
-                <MaterialCommunityIcons
-                  name="account"
-                  color={color}
-                  size={33}
-                />
-              )}
-              label="Signin/Signup"
-              labelStyle={{fontSize: 17, fontWeight: 'bold'}}
+            {props.user ? (
+              <DrawerItem
+                icon={({color}) => (
+                  <MaterialCommunityIcons
+                    name="account"
+                    color={color}
+                    size={33}
+                  />
+                )}
+                label="Logout"
+                labelStyle={{fontSize: 17, fontWeight: 'bold'}}
+                onPress={
+                  (() => props.signout(), props.navigation.navigate('Account'))
+                }
+              />
+            ) : (
+              <DrawerItem
+                icon={({color}) => (
+                  <MaterialCommunityIcons
+                    name="account"
+                    color={color}
+                    size={33}
+                  />
+                )}
+                label="Signin/Signup"
+                labelStyle={{fontSize: 17, fontWeight: 'bold'}}
                 onPress={() =>
                   props.navigation.navigate('Account', {
                     // ...props.route.params,
                   })
                 }
-            />
+              />
+            )}
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
@@ -183,15 +202,14 @@ const styles = StyleSheet.create({
   },
 });
 
-// const mapStateToProps = (state) => ({
-//   reduxstate: state,
-//   user: state.userDetails.user,
-// });
+const mapStateToProps = state => ({
+  user: state.userDetails.user,
+});
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     logout: () => dispatch(logout()),
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    signout: () => dispatch(logout()),
+  };
+};
 
-export default DrawerContent;
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerContent);

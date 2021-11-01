@@ -1,10 +1,18 @@
-import {GET_CATEGORIES, GET_PRODUCTS, GET_REVIEWS, GET_PRODUCT_VARIATIONS} from './ActionTypes';
+/* eslint-disable prettier/prettier */
+import {
+  GET_CATEGORIES,
+  GET_PRODUCTS,
+  GET_REVIEWS,
+  GET_PRODUCT_VARIATIONS,
+  GET_SEARCHED_PRODUCTS,
+} from './ActionTypes';
 
 const initialState = {
   Products: [],
   Categories: [],
-  Reviews: [], 
-  ProductVariations: []
+  Reviews: [],
+  ProductVariations: [],
+  searchedProducts: [],
 };
 
 export default function (state = initialState, action) {
@@ -13,29 +21,31 @@ export default function (state = initialState, action) {
       // console.log('action.payload', action.payload);
       return {
         ...state,
-        Products: action.payload
-        
+        Products: action.payload,
       };
     case GET_CATEGORIES:
       // console.log('action.payload', action.payload);
       return {
         ...state,
-        Categories: action.payload
-        
+        Categories: action.payload,
       };
-      case GET_REVIEWS:
+    case GET_REVIEWS:
       // console.log('action.payload', action.payload);
       return {
         ...state,
-      Reviews: action.payload
-        
+        Reviews: action.payload,
       };
-      case GET_PRODUCT_VARIATIONS:
+    case GET_PRODUCT_VARIATIONS:
       // console.log('action.payload', action.payload);
       return {
         ...state,
-      ProductVariations: action.payload
-        
+        ProductVariations: action.payload,
+      };
+    case GET_SEARCHED_PRODUCTS:
+      // console.log('action.payload', action.payload);
+      return {
+        ...state,
+        searchedProducts: action.payload,
       };
     default:
       return state;

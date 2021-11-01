@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   StyleSheet,
@@ -6,15 +8,21 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {emptyCart} from '../redux/appActions';
 import {Formik} from 'formik';
-import * as yup from 'yup';
+import CountrySelectDropdown from 'react-native-searchable-country-dropdown';
 
-const Checkout = () => {
+const Checkout = props => {
+  // const handleSubmit = values => {
+  //   signupFunction(
+  //     Object.assign({isActivated: true}, values, props.route.params),
+  //   );
+  // };
+
   return (
     <ScrollView style={styles.background}>
       <Text style={styles.heading}>Checkout</Text>
@@ -32,11 +40,20 @@ const Checkout = () => {
             email: '',
             notes: '',
             PaymentMethod: 'cod',
-            PaymentMethodTitle:'Cash on Delivery', 
-            lineItems:[]
+            PaymentMethodTitle: 'Cash on Delivery',
+            lineItems: [],
           }}
-          onSubmit={(values, actions) => {
-            console.log(values);
+          onSubmit={(values, {resetForm}) => {
+            props.EmptyCart();
+            Alert.alert('Order Completed', 'Thankyou for your order.', [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]);
+            resetForm({});
           }}>
           {propss => (
             <View>
@@ -79,6 +96,19 @@ const Checkout = () => {
                     value={propss.values.country}
                     onBlur={propss.handleBlur('country')}
                   />
+                  {/* <CountrySelectDropdown
+                    countrySelect={country => {
+                      propss.handleChange('country');
+                      propss.values.country;
+                      console.log(country);
+                    }}
+                    defaultCountry="PK"
+                    error={msg => console.log(msg)}
+                    style={[styles.input]}
+                    // fontFamily={"Nunito-Regular"}
+                    // textColor={'#f3f3f3'}
+                  /> */}
+                  {/* </TextInput> */}
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
@@ -119,6 +149,7 @@ const Checkout = () => {
                     onChangeText={propss.handleChange('phone')}
                     value={propss.values.phone}
                     onBlur={propss.handleBlur('phone')}
+                    keyboardType="numeric"
                   />
                 </View>
                 <View style={{marginBottom: 7}}>
@@ -161,7 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.White,
     flex: 1,
     paddingHorizontal: 15,
-    paddingVertical:10
+    paddingVertical: 10,
   },
   heading: {
     // color: 'white',
@@ -206,4 +237,10 @@ const mapStateToProps = state => ({
   // token: state.userDetails.token,
 });
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = dispatch => {
+  return {
+    EmptyCart: () => dispatch(emptyCart()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

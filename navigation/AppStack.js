@@ -21,6 +21,7 @@ import {connect} from 'react-redux';
 import ShoppingcartItem from '../screens/ShoppingcartItem';
 import Checkout from '../screens/Checkout';
 import Register from '../screens/Register';
+import UserAccount from '../screens/UserAccount';
 // import Icon from 'react-native-vector-icons';
 
 const HomeStack = createStackNavigator();
@@ -50,8 +51,7 @@ const AppStack = props => {
               color={'black'}
               onPress={() => navigation.openDrawer()}></Ionicons.Button>
           ),
-          headerRight: () => <ShoppingcartItem navigation={navigation}/>
-          ,
+          headerRight: () => <ShoppingcartItem navigation={navigation} />,
         }}
       />
     </HomeStack.Navigator>
@@ -123,7 +123,7 @@ const AppStack = props => {
       </Tab.Navigator>
     );
   };
-  
+
   const ShopStackScreen = () => {
     return (
       <Stack.Navigator
@@ -134,7 +134,6 @@ const AppStack = props => {
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Checkout" component={Checkout} />
-
       </Stack.Navigator>
     );
   };
@@ -147,11 +146,11 @@ const AppStack = props => {
         }}>
         <Stack.Screen name="Account" component={Account} />
         <Stack.Screen name="Register" component={Register} />
-
+        <Stack.Screen name="UserAccount" component={UserAccount} />
       </Stack.Navigator>
     );
   };
-  
+
   const HomeStackScreens = () => {
     return (
       <Stack.Navigator
@@ -163,7 +162,6 @@ const AppStack = props => {
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Checkout" component={Checkout} />
-
       </Stack.Navigator>
     );
   };
@@ -175,8 +173,6 @@ const AppStack = props => {
     </Drawer.Navigator>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   shadow: {
@@ -191,4 +187,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppStack
+export default AppStack;
