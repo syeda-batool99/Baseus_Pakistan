@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
@@ -15,21 +16,20 @@ import {connect} from 'react-redux';
 import {signup} from '../redux/appActions';
 
 const Register = props => {
-  const handleSubmit = values => {
-    signupFunction(
-      Object.assign({isActivated: true}, values, props.route.params),
-    );
-  };
-
   const signupFunction = async body => {
     try {
       // await props.setLoading(true);
-      //   setButtonLoading(true);
+      console.log('Body in signup', body);
       const result = await props.signup(body);
-      //   setButtonLoading(false);
-      if (result.error) {
-        console.log('result.error', result.error);
+
+      if (result) {
+        Alert.alert('Registration Successful');
+        props.navigation.navigate('Home');
       }
+      // if (result.error) {
+      //   console.log('result.error', result.error);
+      //   Alert.alert(result.error);
+      // }
     } catch (error) {
       console.log('error d: ', error);
     }
@@ -62,8 +62,9 @@ const Register = props => {
             initialValues={{email: '', password: '', passwordConfirmation: ''}}
             validationSchema={reviewSchema}
             onSubmit={(values, actions) => {
-              handleSubmit({
-                email: values.email.toLowerCase(),
+              actions.resetForm();
+              signupFunction({
+                email: values.email,
                 password: values.password,
               });
             }}>
@@ -171,6 +172,11 @@ const Register = props => {
               </View>
             )}
           </Formik>
+          <TouchableOpacity
+            onPress={() => props.navigation.goBack()}
+            style={styles.btnContainer1}>
+            <Text style={styles.button}>Back to Login</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -219,6 +225,10 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     width: '100%',
+  },
+  btnContainer1: {
+    width: '100%',
+    marginVertical: 20,
   },
   forgotText: {
     color: Colors.Olive,

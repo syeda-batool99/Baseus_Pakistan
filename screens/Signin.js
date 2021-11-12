@@ -7,13 +7,32 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import {connect} from 'react-redux';
+import axios from 'axios';
+import {signin, signinValidate} from '../redux/appActions';
 
 const Signin = props => {
   const [modalVisible, setModalVisible] = useState(false);
+  // const login = body => {
+  //   console.log('in login');
+  //   const url = 'https://baseus.com.pk/wp-json/jwt-auth/v1/token';
+  //   axios
+  //     .post(url, body)
+  //     .then(response => {
+  //       console.log('in signin got response', response.data);
+  //       // let token = response?.data?.data?.token;
+  //       // console.log('token', token);
+  //       // props.GetUser(response.data.id);
+  //     })
+  //     .catch(error => {
+  //       Alert.alert('Signin Error', error.response.data.message);
+  //     });
+  // };
   return (
     <ScrollView>
       <Modal
@@ -67,9 +86,13 @@ const Signin = props => {
         <Text style={{fontSize: 22, marginHorizontal: 20}}>Login</Text>
         <View style={{margin: 15}}>
           <Formik
-            initialValues={{email: '', password: ''}}
+            initialValues={{username: '', password: ''}}
             onSubmit={(values, actions) => {
-              console.log(values);
+              console.log('in handleSubmit', values);
+              props.SignIn({
+                username: values.username,
+                password: values.password,
+              });
             }}>
             {propss => (
               <View>
@@ -81,11 +104,11 @@ const Signin = props => {
                   <View style={{marginBottom: 7}}>
                     <TextInput
                       style={styles.input}
-                      placeholder=" Email"
+                      placeholder=" Email/Username"
                       placeholderTextColor={Colors.LightGray}
-                      onChangeText={propss.handleChange('email')}
-                      value={propss.values.email}
-                      onBlur={propss.handleBlur('email')}
+                      onChangeText={propss.handleChange('username')}
+                      value={propss.values.username}
+                      onBlur={propss.handleBlur('username')}
                     />
                   </View>
                   <View style={{marginBottom: 7}}>
@@ -104,7 +127,7 @@ const Signin = props => {
                 </View>
                 <View>
                   <TouchableOpacity
-                    onPress={props.MainProps.handleSubmit}
+                    onPress={propss.handleSubmit}
                     style={styles.btnContainer}>
                     <Text style={styles.button}>LOG IN</Text>
                   </TouchableOpacity>
@@ -198,4 +221,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signin;
+const mapStateToProps = state => ({
+  user: state.userDetails.user,
+});
+const mapDispatchToProps = dispatch => {
+  return {
+    SignIn: body => dispatch(signin(body)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

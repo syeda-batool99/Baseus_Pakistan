@@ -21,156 +21,191 @@ import {connect} from 'react-redux';
 import ShoppingcartItem from '../screens/ShoppingcartItem';
 import Checkout from '../screens/Checkout';
 import Register from '../screens/Register';
+import Signin from '../screens/Signin';
 import UserAccount from '../screens/UserAccount';
+import WhatsApp from '../screens/Whatsapp';
 // import Icon from 'react-native-vector-icons';
+import {Linking} from 'react-native';
 
 const HomeStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const openWhatsApp = () => {
+  let url = 'whatsapp://send?text=&phone=923207862032';
+  Linking.openURL(url)
+    .then(data => {
+      console.log('WhatsApp Opened successfully ' + data);
+    })
+    .catch(() => {
+      alert('Make sure WhatsApp installed on your device');
+    });
+};
 
 const AppStack = props => {
-  const HomeStackScreen = ({navigation}) => (
-    <HomeStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: Colors.Yellow,
-        },
-      }}>
-      <HomeStack.Screen
-        name="Home"
-        component={MainBottomTabStack}
-        options={{
-          title: 'Baseus Pakistan',
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <Ionicons.Button
-              name="menu"
-              size={30}
-              backgroundColor={Colors.Yellow}
-              color={'black'}
-              onPress={() => navigation.openDrawer()}></Ionicons.Button>
-          ),
-          headerRight: () => <ShoppingcartItem navigation={navigation} />,
-        }}
-      />
-    </HomeStack.Navigator>
-  );
-  const MainBottomTabStack = () => {
-    return (
-      <Tab.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        tabBarOptions={{
-          activeTintColor: 'black',
-          inactiveTintColor: 'black',
-          activeBackgroundColor: Colors.Yellow,
-          inactiveBackgroundColor: Colors.Yellow,
-        }}>
-        <Tab.Screen
-          name="Home"
-          options={{
-            tabBarIcon: ({focused}) => (
-              <MaterialCommunityIcons
-                name="home"
-                color={focused ? '#000000' : Colors.Olive}
-                size={26}
-              />
-            ),
-          }}
-          component={HomeStackScreens}
-        />
-        <Tab.Screen
-          name="Shop"
-          component={ShopStackScreen}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <MaterialIcons
-                name="shopping-cart"
-                color={focused ? '#000000' : Colors.Olive}
-                size={28}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Contact"
-          component={ContactUs}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <MaterialIcons
-                name="call"
-                color={focused ? '#000000' : Colors.Olive}
-                size={27}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Account"
-          component={AccountStack}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <FontAwesome5
-                name="user-alt"
-                color={focused ? '#000000' : Colors.Olive}
-                size={20}
-              />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    );
-  };
+  console.log('props in appStack', props);
 
-  const ShopStackScreen = () => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Shop" component={Shop} />
-        <Stack.Screen name="ProductDetail" component={ProductDetail} />
-        <Stack.Screen name="Cart" component={Cart} />
-        <Stack.Screen name="Checkout" component={Checkout} />
-      </Stack.Navigator>
-    );
-  };
-
-  const AccountStack = () => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Account" component={Account} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="UserAccount" component={UserAccount} />
-      </Stack.Navigator>
-    );
-  };
-
-  const HomeStackScreens = () => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Shop" component={Shop} />
-        <Stack.Screen name="ProductDetail" component={ProductDetail} />
-        <Stack.Screen name="Cart" component={Cart} />
-        <Stack.Screen name="Checkout" component={Checkout} />
-      </Stack.Navigator>
-    );
-  };
   return (
     <Drawer.Navigator
       screenOptions={{headerShown: false}}
       drawerContent={props => <DrawerContent {...props} />}>
       <Drawer.Screen name="Baseus Pakistan" component={HomeStackScreen} />
     </Drawer.Navigator>
+  );
+};
+
+const HomeStackScreen = ({navigation}) => (
+  <HomeStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: Colors.Yellow,
+      },
+    }}>
+    <HomeStack.Screen
+      name="Home"
+      component={MainBottomTabStack}
+      options={{
+        title: 'Baseus Pakistan',
+        headerTitleAlign: 'center',
+        headerLeft: () => (
+          <Ionicons.Button
+            name="menu"
+            size={30}
+            backgroundColor={Colors.Yellow}
+            color={'black'}
+            onPress={() => navigation.openDrawer()}></Ionicons.Button>
+        ),
+        headerRight: () => <ShoppingcartItem navigation={navigation} />,
+      }}
+    />
+  </HomeStack.Navigator>
+);
+const MainBottomTabStack = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'black',
+        tabBarActiveBackgroundColor: '#fff000',
+        tabBarInactiveBackgroundColor: '#fff000',
+        tabBarStyle: [
+          {
+            display: 'flex',
+          },
+          null,
+        ],
+      }}>
+      <Tab.Screen
+        name="Home"
+        options={{
+          tabBarIcon: ({focused}) => (
+            <MaterialCommunityIcons
+              name="home"
+              color={focused ? '#000000' : Colors.Olive}
+              size={26}
+            />
+          ),
+        }}
+        component={HomeStackScreens}
+      />
+      <Tab.Screen
+        name="Shop"
+        component={ShopStackScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <MaterialIcons
+              name="shopping-cart"
+              color={focused ? '#000000' : Colors.Olive}
+              size={28}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Contact"
+        component={ContactUs}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <MaterialIcons
+              name="call"
+              color={focused ? '#000000' : Colors.Olive}
+              size={27}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountStack}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <FontAwesome5
+              name="user-alt"
+              color={focused ? '#000000' : Colors.Olive}
+              size={20}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Whatsapp"
+        component={WhatsApp}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <FontAwesome5
+              name="whatsapp-square"
+              color={focused ? '#25D366' : '#25D366'}
+              size={30}
+              onPress={openWhatsApp}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
+const ShopStackScreen = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Shop" component={Shop} />
+      <Stack.Screen name="ProductDetail" component={ProductDetail} />
+      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="Checkout" component={Checkout} />
+    </Stack.Navigator>
+  );
+};
+
+const AccountStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Signin" component={Signin} />
+      <Stack.Screen name="UserAccount" component={UserAccount} />
+    </Stack.Navigator>
+  );
+};
+
+const HomeStackScreens = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Shop" component={Shop} />
+      <Stack.Screen name="ProductDetail" component={ProductDetail} />
+      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="Checkout" component={Checkout} />
+    </Stack.Navigator>
   );
 };
 

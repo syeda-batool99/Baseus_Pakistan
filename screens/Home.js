@@ -19,6 +19,7 @@ import * as Colors from '../assets/Colors/index';
 // import {getProducts} from '../shared/Products';
 import {connect} from 'react-redux';
 import {addToCart, getProducts, getCategories} from '../redux/appActions';
+import WhatsApp from './Whatsapp';
 
 const Home = props => {
   const [ProductsFromApiCall, setProducts] = useState([]);

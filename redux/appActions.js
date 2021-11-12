@@ -11,6 +11,7 @@ import {
   GET_REVIEWS,
   GET_PRODUCT_VARIATIONS,
   GET_SEARCHED_PRODUCTS,
+  SIGNIN_USER,
 } from './ActionTypes';
 import axios from 'axios';
 import Constants from './Constants';
@@ -149,32 +150,80 @@ export const signup = body => async dispatch => {
     });
     return response.data;
   } catch (error) {
-    console.log('error signup', error.message);
-    Alert.alert('Error', 'This account already exists. Please Signin', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ]);
+    console.log('error signup', error.response.data.message);
+    Alert.alert('Error', error.response.data.message);
   }
 };
 
-// export const signin = (body) => async (dispatch) => {
-//   const url = `${Constants.URL.wc}customers?consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
-//   try {
-//     console.log('in signup', body);
-//     let response = await axios.post(url, body);
-//     console.log('in signup got response', response);
-//     await dispatch({
-//       type: SIGNUP_USER,
-//       payload: response.data,
+export const getUserById = id => async dispatch => {
+  const url = `${Constants.URL.wc}customers/${id}`;
+  try {
+    console.log('in getuserbyId', id);
+    let response = await axios.post(url, id);
+    console.log('in getuserbyId got response', response);
+    await dispatch({
+      type: SIGNIN_USER,
+      payload: response.data,
+    });
+    return response.data;
+  } catch (error) {
+    console.log('error getuserbyId', error.message);
+  }
+};
+
+export const signin = body => async dispatch => {
+  console.log('in login');
+  const url = 'https://baseus.com.pk/wp-json/jwt-auth/v1/token';
+  try {
+    console.log('in signin', body);
+    let response = await axios.post(url, body);
+    console.log('in signin got response', response.data);
+    await dispatch({
+      type: SIGNIN_USER,
+      payload: response.data.data,
+    });
+    return response.data.data;
+  } catch (error) {
+    console.log('error signin', error.response.data.message);
+    Alert.alert('Signin Error', error.response.data.message);
+  }
+  // axios
+  //   .post(url, body)
+  //   .then(response => {
+  //     console.log('in signin got response', response.data);
+  //     // let token = response?.data?.data?.token;
+  //     // console.log('token', token);
+  //     // props.GetUser(response.data.id);
+  //     dispatch({
+  //       type: SIGNIN_USER,
+  //       payload: response.data.data,
+  //     });
+  //   })
+  //   .catch(error => {
+  //     Alert.alert('Signin Error', error.response.data.message);
+  //   });
+};
+
+// export const signinValidate = (body, token) => dispatch => {
+//   console.log('in signinValidate', body, token);
+//   const headers = {
+//     Authorization: `Bearer ${token}`,
+//   };
+//   const url = 'https://baseus.com.pk/wp-json/jwt-auth/v1/token/validate';
+//   axios
+//     .post(url, body, {
+//       headers: headers,
+//     })
+//     .then(response => {
+//       console.log('in signinValidate got response', response.data);
+//       dispatch({
+//         type: SIGNIN_USER,
+//         payload: response.data.data,
+//       });
+//     })
+//     .catch(error => {
+//       Alert.alert('error logging in', error);
 //     });
-//     return response.data;
-//   } catch (error) {
-//     console.log('error signup', error);
-//   }
 // };
 
 export const addToCart = item => async dispatch => {

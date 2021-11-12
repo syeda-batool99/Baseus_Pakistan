@@ -4,7 +4,7 @@ import {SIGNIN_USER, SIGNUP_USER, CLEAR_USER} from './ActionTypes';
 const initialState = {
   user: null,
   isloggedIn: false,
-  role: '',
+  // role: '',
 };
 
 export default function (state = initialState, action) {
@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
         ...state,
         user: action.payload,
         isloggedIn: true,
-        userType: action.payload.role,
+        // userType: action.payload.role,
       };
     case SIGNIN_USER:
       console.log('action.payload', action.payload);
@@ -22,14 +22,14 @@ export default function (state = initialState, action) {
         ...state,
         user: action.payload,
         isloggedIn: true,
-        userType: action.payload.role,
+        // userType: action.payload.role,
       };
     case CLEAR_USER:
       return {
         ...state,
         user: null,
         isloggedIn: false,
-        userType: undefined,
+        // userType: undefined,
       };
     default:
       return state;

@@ -24,7 +24,7 @@ const DrawerContent = props => {
   return (
     <View style={{flex: 1}}>
       {/* {console.log('Props in drawer', props)} */}
-      <DrawerContentScrollView {...props}>
+      <DrawerContentScrollView>
         {/* {console.log('Props in drawer2', props)} */}
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
@@ -116,9 +116,7 @@ const DrawerContent = props => {
                 )}
                 label="Logout"
                 labelStyle={{fontSize: 17, fontWeight: 'bold'}}
-                onPress={
-                  (() => props.signout(), props.navigation.navigate('Account'))
-                }
+                onPress={() => props.signout()}
               />
             ) : (
               <DrawerItem
@@ -204,6 +202,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   user: state.userDetails.user,
+  loggedIn: state.userDetails.isloggedIn,
 });
 
 const mapDispatchToProps = dispatch => {

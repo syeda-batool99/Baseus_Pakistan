@@ -21,7 +21,10 @@ const UserAccount = props => {
       <View style={styles.box}>
         <View style={{flexDirection: 'row'}}>
           <FontAwesome name={'user-circle'} size={30} />
-          <Text style={styles.userName}>Hello, User</Text>
+          <Text style={styles.userName}>
+            Hello{' '}
+            {props.user.username ? props.user.username : props.user.displayName}
+          </Text>
         </View>
         <View
           style={{
@@ -282,12 +285,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  // user: state.userDetails.user,
-  products: state.appData.Products,
-  categories: state.appData.Categories,
-  cartItems: state.cart.cart,
-  cartTotal: state.cart.total,
-  order: state.order,
+  user: state.userDetails.user,
+  // products: state.appData.Products,
+  // categories: state.appData.Categories,
+  // cartItems: state.cart.cart,
+  // cartTotal: state.cart.total,
+  // order: state.order,
   // token: state.userDetails.token,
 });
 
