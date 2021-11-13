@@ -26,6 +26,8 @@ import UserAccount from '../screens/UserAccount';
 import WhatsApp from '../screens/Whatsapp';
 // import Icon from 'react-native-vector-icons';
 import {Linking} from 'react-native';
+import Wallet from '../screens/Wallet';
+import MyWallet from '../screens/MyWallet';
 
 const HomeStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -176,6 +178,7 @@ const ShopStackScreen = () => {
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
+      <Stack.Screen name="MyWallet" component={MyWallet} />
     </Stack.Navigator>
   );
 };
@@ -205,6 +208,7 @@ const HomeStackScreens = () => {
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
+      <Stack.Screen name="MyWallet" component={MyWallet} />
     </Stack.Navigator>
   );
 };
