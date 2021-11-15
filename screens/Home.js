@@ -70,8 +70,13 @@ const Home = props => {
             ...props.route.params,
             item,
           });
+        }}
+        style={{
+          width: '33.33%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
         }}>
-        <View style={{width: 100, marginHorizontal: 8}}>
+        <View>
           <Image
             source={{uri: item.images[0].src}}
             style={styles.productImage}
@@ -81,7 +86,7 @@ const Home = props => {
             // ellipsizeMode={'tail'}
             style={styles.productName}
             numberOfLines={2}>
-            {item.name}
+            {item.name.substring(0, 25)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
           <TouchableOpacity
@@ -95,49 +100,43 @@ const Home = props => {
   };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}>
-      <ScrollView style={styles.background}>
-        {/* <Header /> */}
-        <View>
-          <SliderBox images={images.images} />
-        </View>
-        <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>Categories</Text>
-        </View>
-        <SafeAreaView style={styles.container}>
-          <FlatList
-            horizontal
-            data={Categories}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
-        </SafeAreaView>
-        <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>Products</Text>
-          <TouchableOpacity onPress={() => props.navigation.navigate('Shop')}>
-            <Text
-              style={{
-                fontSize: 16,
-                // color: '#FFFFFF',
-              }}>
-              See All
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <SafeAreaView style={styles.container}>
-          <FlatList
-            horizontal={false}
-            numColumns={3}
-            data={ProductsFromApiCall.slice(0, 6)}
-            renderItem={renderProduct}
-            keyExtractor={item => item.id}
-          />
-        </SafeAreaView>
-      </ScrollView>
-    </TouchableWithoutFeedback>
+    <ScrollView style={styles.background}>
+      {/* <Header /> */}
+      <View>
+        <SliderBox images={images.images} />
+      </View>
+      <View style={styles.subtitleContainer}>
+        <Text style={styles.subtitle}>Categories</Text>
+      </View>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          horizontal
+          data={Categories}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      </SafeAreaView>
+      <View style={styles.subtitleContainer}>
+        <Text style={styles.subtitle}>Products</Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Shop')}>
+          <Text
+            style={{
+              fontSize: 16,
+              // color: '#FFFFFF',
+            }}>
+            See All
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          numColumns={3}
+          data={ProductsFromApiCall.slice(0, 6)}
+          renderItem={renderProduct}
+          keyExtractor={item => item.id}
+        />
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 
