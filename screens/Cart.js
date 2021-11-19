@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,15 +7,16 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';
 import * as Colors from '../assets/Colors/index';
 import {removeItem, emptyCart} from '../redux/appActions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import NumericInput from 'react-native-numeric-input';
-import {TextInput} from 'react-native-gesture-handler';
+import InputSpinner from 'react-native-input-spinner';
 
 const Cart = props => {
+  const [refreshPage, setRefreshPage] = useState('');
   const cartItemsRender = ({item}) => {
     const index = props.cartItems.indexOf(item);
     // console.log('index', index)
@@ -36,17 +37,24 @@ const Cart = props => {
         </View>
         <View style={styles.ItemContainer2}>
           <Text style={styles.subheading}>Quantity: </Text>
-          <NumericInput
-            onChange={value => console.log(value)}
-            totalWidth={100}
-            totalHeight={35}
-            valueType="real"
-            minValue={1}
-            textColor="black"
-            separatorWidth={0}
-            iconStyle={{color: 'black'}}
-            rightButtonBackgroundColor={Colors.LightYellow}
-            leftButtonBackgroundColor={Colors.LightYellow}
+          <InputSpinner
+            max={10}
+            min={1}
+            step={1}
+            initialValue={'1'}
+            buttonStyle={{
+              backgroundColor: Colors.LightYellow,
+              borderRadius: 50,
+            }}
+            height={40}
+            // buttonTextStyle={{textAlign: 'top'}}
+            buttonTextColor={'black'}
+            // colorMax={'#f04048'}
+            // colorMin={'#40c5f4'}
+            // value={this.state.number}
+            onChange={num => {
+              setRefreshPage('refresh');
+            }}
           />
         </View>
         {/* <View style={styles.ItemContainer2}>
@@ -186,6 +194,13 @@ const styles = StyleSheet.create({
   },
   ItemContainer2: {
     flexDirection: 'row',
+    borderBottomColor: Colors.Olive,
+    borderBottomWidth: 1,
+    padding: 3,
+  },
+  QuantityItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomColor: Colors.Olive,
     borderBottomWidth: 1,
     padding: 3,

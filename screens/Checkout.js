@@ -14,6 +14,7 @@ import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
 import {emptyCart} from '../redux/appActions';
 import {Formik} from 'formik';
+import Toast from 'react-native-toast-message';
 import CountrySelectDropdown from 'react-native-searchable-country-dropdown';
 
 const Checkout = props => {
@@ -22,6 +23,14 @@ const Checkout = props => {
   //     Object.assign({isActivated: true}, values, props.route.params),
   //   );
   // };
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Order Completed',
+      text2: 'Thankyou for your order',
+      position: 'top',
+    });
+  };
 
   return (
     <ScrollView style={styles.background}>
@@ -45,14 +54,7 @@ const Checkout = props => {
           }}
           onSubmit={(values, {resetForm}) => {
             props.EmptyCart();
-            Alert.alert('Order Completed', 'Thankyou for your order.', [
-              {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-              },
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ]);
+            showToast();
             resetForm({});
           }}>
           {propss => (

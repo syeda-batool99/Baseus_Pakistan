@@ -12,14 +12,18 @@ import {
   GET_PRODUCT_VARIATIONS,
   GET_SEARCHED_PRODUCTS,
   SIGNIN_USER,
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST,
+  EMPTY_WISHLIST,
 } from './ActionTypes';
 import axios from 'axios';
 import Constants from './Constants';
 import {Alert} from 'react-native';
+import Toast from 'react-native-toast-message';
 // import {URL, loginRoute, signupRoute, verifyCNICRoute} from '../config/const';
 
 export const getProducts = () => async dispatch => {
-  const url = `${Constants.URL.wc}products?per_page=30&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  const url = `${Constants.URL.wc}products?per_page=100&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
   try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);
@@ -30,6 +34,12 @@ export const getProducts = () => async dispatch => {
     return response.data;
   } catch (error) {
     console.log('error getProducts', error);
+    Toast.show({
+      type: 'error',
+      text1: 'Error',
+      text2: error,
+      position: 'top',
+    });
   }
 };
 
@@ -151,7 +161,12 @@ export const signup = body => async dispatch => {
     return response.data;
   } catch (error) {
     console.log('error signup', error.response.data.message);
-    Alert.alert('Error', error.response.data.message);
+    Toast.show({
+      type: 'error',
+      text1: 'Signup Error',
+      text2: error.response.data.message,
+      position: 'top',
+    });
   }
 };
 
@@ -185,7 +200,12 @@ export const signin = body => async dispatch => {
     return response.data.data;
   } catch (error) {
     console.log('error signin', error.response.data.message);
-    Alert.alert('Signin Error', error.response.data.message);
+    Toast.show({
+      type: 'error',
+      text1: 'Signin Error',
+      text2: error.response.data.message,
+      position: 'top',
+    });
   }
   // axios
   //   .post(url, body)
@@ -203,28 +223,6 @@ export const signin = body => async dispatch => {
   //     Alert.alert('Signin Error', error.response.data.message);
   //   });
 };
-
-// export const signinValidate = (body, token) => dispatch => {
-//   console.log('in signinValidate', body, token);
-//   const headers = {
-//     Authorization: `Bearer ${token}`,
-//   };
-//   const url = 'https://baseus.com.pk/wp-json/jwt-auth/v1/token/validate';
-//   axios
-//     .post(url, body, {
-//       headers: headers,
-//     })
-//     .then(response => {
-//       console.log('in signinValidate got response', response.data);
-//       dispatch({
-//         type: SIGNIN_USER,
-//         payload: response.data.data,
-//       });
-//     })
-//     .catch(error => {
-//       Alert.alert('error logging in', error);
-//     });
-// };
 
 export const addToCart = item => async dispatch => {
   try {
@@ -250,6 +248,39 @@ export const removeItem = (item, id) => async dispatch => {
 export const emptyCart = () => async dispatch => {
   dispatch({
     type: EMPTY_CART,
+  });
+};
+
+export const addToWishlist = item => async dispatch => {
+  try {
+    // console.log('in addtoCart app actions', item, typeof dispatch);
+
+    await dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: item,
+    });
+    Toast.show({
+      type: 'success',
+      text1: 'Successful',
+      text2: 'Item added to wishlist',
+      position: 'top',
+    });
+    return item;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const removefromWishlist = (item, id) => async dispatch => {
+  // console.log('in remove items app action', id);
+  dispatch({
+    type: REMOVE_FROM_WISHLIST,
+    payload: item,
+    index: id,
+  });
+};
+export const emptyWishlist = () => async dispatch => {
+  dispatch({
+    type: EMPTY_WISHLIST,
   });
 };
 

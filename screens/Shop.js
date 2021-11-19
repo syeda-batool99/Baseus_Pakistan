@@ -16,11 +16,14 @@ import {
 // import {Searchbar} from 'react-native-paper';
 import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   addToCart,
   getProducts,
   getProductsByCategory,
   getProductsBySearch,
+  addToWishlist,
 } from '../redux/appActions';
 
 const Shop = props => {
@@ -40,6 +43,9 @@ const Shop = props => {
   const renderProduct = item => <Product item={item.item} />;
 
   const Product = ({item}) => {
+    const discountedPrice = item.regular_price - item.sale_price;
+    const number = discountedPrice / item.regular_price;
+    const percentage = Math.round(number * 100);
     // console.log('product', item.image);
     return (
       <TouchableOpacity
@@ -59,6 +65,24 @@ const Shop = props => {
             source={{uri: item.images[0].src}}
             style={styles.productImage}
           />
+          {item.on_sale && (
+            <View
+              style={{
+                position: 'absolute',
+                right: 5,
+                top: 5,
+                backgroundColor: Colors.Yellow,
+                borderRadius: 35 / 2,
+                paddingHorizontal: 3,
+                width: 35,
+                height: 35,
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontSize: 12, fontWeight: 'bold'}}>
+                -{percentage}%{' '}
+              </Text>
+            </View>
+          )}
           <Text
             // adjustsFontSizeToFit= {true}
             // ellipsizeMode={'tail'}
@@ -67,11 +91,28 @@ const Shop = props => {
             {item.name.substring(0, 25)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
-          <TouchableOpacity
-            style={{marginBottom: 15}}
-            onPress={() => props.AddToCart(item)}>
-            <Text style={styles.addToCartBtn}>Add to cart </Text>
-          </TouchableOpacity>
+          <View style={styles.addToCartBtn}>
+            <TouchableOpacity
+              // style={{marginBottom: 15}}
+              onPress={() => props.AddToCart(item)}>
+              {/* <Text style={styles.addToCartBtn}>Add to cart </Text> */}
+              <FontAwesome
+                name={'cart-plus'}
+                size={30}
+                color={Colors.VeryDarkGray}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              // style={{marginBottom: 15}}
+              onPress={() => props.AddToWishlist(item)}>
+              {/* <Text >Add to Wishlist </Text> */}
+              <MaterialCommunityIcons
+                name={'heart-plus'}
+                size={30}
+                color={Colors.VeryDarkGray}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -224,8 +265,11 @@ const styles = StyleSheet.create({
   },
   addToCartBtn: {
     backgroundColor: Colors.Yellow,
-    textAlign: 'center',
+    // textAlign: 'center',
     borderRadius: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10,
   },
 });
 
@@ -244,6 +288,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(getProductsByCategory(categoryId)),
     GetProductsBySearch: searchString =>
       dispatch(getProductsBySearch(searchString)),
+    AddToWishlist: body => dispatch(addToWishlist(body)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Shop);

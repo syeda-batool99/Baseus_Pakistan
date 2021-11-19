@@ -28,6 +28,7 @@ import WhatsApp from '../screens/Whatsapp';
 import {Linking} from 'react-native';
 import Wallet from '../screens/Wallet';
 import MyWallet from '../screens/MyWallet';
+import Wishlist from '../screens/Wishlist';
 
 const HomeStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -125,6 +126,19 @@ const MainBottomTabStack = () => {
         }}
       />
       <Tab.Screen
+        name="Wishlist"
+        component={Wishlist}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <MaterialCommunityIcons
+              name="heart"
+              color={focused ? '#000000' : Colors.Olive}
+              size={27}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Contact"
         component={ContactUs}
         options={{
@@ -179,6 +193,7 @@ const ShopStackScreen = () => {
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen name="MyWallet" component={MyWallet} />
+      <Stack.Screen name="Wishlist" component={Wishlist} />
     </Stack.Navigator>
   );
 };
@@ -209,6 +224,7 @@ const HomeStackScreens = () => {
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen name="MyWallet" component={MyWallet} />
+      <Stack.Screen name="Wishlist" component={Wishlist} />
     </Stack.Navigator>
   );
 };

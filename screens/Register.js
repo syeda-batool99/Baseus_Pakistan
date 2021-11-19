@@ -14,6 +14,7 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import {connect} from 'react-redux';
 import {signup} from '../redux/appActions';
+import Toast from 'react-native-toast-message';
 
 const Register = props => {
   const signupFunction = async body => {
@@ -23,7 +24,13 @@ const Register = props => {
       const result = await props.signup(body);
 
       if (result) {
-        Alert.alert('Registration Successful');
+        Toast.show({
+          type: 'success',
+          text1: 'Successful',
+          text2: 'Thankyou for registering',
+          position: 'top',
+        });
+
         props.navigation.navigate('Home');
       }
       // if (result.error) {

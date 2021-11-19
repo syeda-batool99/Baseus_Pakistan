@@ -15,24 +15,20 @@ import * as yup from 'yup';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {signin, signinValidate} from '../redux/appActions';
+import CustomAlert from '../shared/CustomAlert';
 
 const Signin = props => {
   const [modalVisible, setModalVisible] = useState(false);
-  // const login = body => {
-  //   console.log('in login');
-  //   const url = 'https://baseus.com.pk/wp-json/jwt-auth/v1/token';
-  //   axios
-  //     .post(url, body)
-  //     .then(response => {
-  //       console.log('in signin got response', response.data);
-  //       // let token = response?.data?.data?.token;
-  //       // console.log('token', token);
-  //       // props.GetUser(response.data.id);
-  //     })
-  //     .catch(error => {
-  //       Alert.alert('Signin Error', error.response.data.message);
-  //     });
-  // };
+  const [error, setError] = useState({responseCode: 200, message: ''});
+  const reviewSchema = yup.object({
+    email: yup
+      .string()
+      .required('Email is a required field')
+      .matches(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        'Invalid Email',
+      ),
+  });
   return (
     <ScrollView>
       <Modal
@@ -50,8 +46,9 @@ const Signin = props => {
             </Text>
             <Formik
               initialValues={{email: ''}}
+              validationSchema={reviewSchema}
               onSubmit={(values, actions) => {
-                // console.log(values);
+                setModalVisible(!modalVisible);
               }}>
               {propss => (
                 <View>
@@ -62,22 +59,41 @@ const Signin = props => {
                     }}>
                     <View style={{marginBottom: 7}}>
                       <TextInput
-                        style={styles.Modalinput}
-                        placeholder=" Email"
-                        placeholderTextColor={'black'}
+                        style={
+                          error.responseCode == 404 ||
+                          (propss.errors.email && propss.touched.email)
+                            ? styles.errorInput
+                            : styles.input
+                        }
+                        placeholder="example@gmail.com"
                         onChangeText={propss.handleChange('email')}
                         value={propss.values.email}
                         onBlur={propss.handleBlur('email')}
                       />
+                      <View>
+                        <Text style={{color: 'red'}}>
+                          {error.responseCode == 404
+                            ? 'Email not found'
+                            : propss.errors.email && propss.touched.email
+                            ? propss.errors.email
+                            : ''}
+                        </Text>
+                      </View>
                     </View>
                   </View>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={propss.handleSubmit}>
+                    <Text style={styles.textStyle}>RESET PASSWORD</Text>
+                  </TouchableOpacity>
                 </View>
               )}
             </Formik>
+
             <TouchableOpacity
               style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>RESET PASSWORD</Text>
+              <Text style={styles.textStyle}>Back to Login</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -166,12 +182,22 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     color: 'black',
   },
+  errorInput: {
+    height: 40,
+    borderColor: 'red',
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: '#FEF8FF',
+    padding: 10,
+    fontSize: 16,
+  },
   button: {
     backgroundColor: Colors.Yellow,
     textAlign: 'center',
     borderRadius: 12,
     fontStyle: 'italic',
     padding: 10,
+    marginVertical: 10,
   },
   btnContainer: {
     width: '100%',
