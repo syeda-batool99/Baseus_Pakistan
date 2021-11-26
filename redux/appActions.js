@@ -15,6 +15,7 @@ import {
   ADD_TO_WISHLIST,
   REMOVE_FROM_WISHLIST,
   EMPTY_WISHLIST,
+  UPDATE_CART,
 } from './ActionTypes';
 import axios from 'axios';
 import Constants from './Constants';
@@ -226,11 +227,12 @@ export const signin = body => async dispatch => {
 
 export const addToCart = item => async dispatch => {
   try {
-    console.log('in addtoCart app actions', item, typeof dispatch);
+    // console.log('in addtoCart app actions', item, typeof dispatch);
+    console.log('item in addToCart', item);
 
     await dispatch({
       type: ADD_TO_CART,
-      payload: item,
+      payload: {...item, qty: 1},
     });
     return item;
   } catch (error) {
@@ -249,6 +251,23 @@ export const emptyCart = () => async dispatch => {
   dispatch({
     type: EMPTY_CART,
   });
+};
+
+export const updateCart = (item, operation) => async dispatch => {
+  // console.log('in update cart', item, num);
+  try {
+    console.log('in updateCart app actions', item.qty, operation);
+
+    await dispatch({
+      type: UPDATE_CART,
+      payload: item,
+      // quantity: num,
+      operation,
+    });
+    return item;
+  } catch (error) {
+    console.log('error in update', error);
+  }
 };
 
 export const addToWishlist = item => async dispatch => {

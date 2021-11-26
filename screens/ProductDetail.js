@@ -129,26 +129,7 @@ const ProductDetail = props => {
             <Text style={styles.buttonText}>Add to cart</Text>
           </TouchableOpacity>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={[styles.itemPrice, {color: 'black'}]}>Quantity: </Text>
-          <NumericInput
-            onChange={value => console.log(value)}
-            totalWidth={200}
-            totalHeight={40}
-            valueType="real"
-            minValue={1}
-            // value={1}
-            rounded
-            // step={1}
-            // initValue={1}
-            // textColor="white"
-            separatorWidth={0}
-            iconStyle={{color: 'black'}}
-            containerStyle={{marginVertical: 10}}
-            rightButtonBackgroundColor={Colors.LightYellow}
-            leftButtonBackgroundColor={Colors.LightYellow}
-          />
-        </View>
+
         {item.attributes.length > 0 && (
           <View>
             {/* {item.attributes[0].options.map((item,i) => console.log("item", item))} */}

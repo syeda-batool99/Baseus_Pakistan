@@ -88,7 +88,7 @@ const Shop = props => {
             // ellipsizeMode={'tail'}
             style={styles.productName}
             numberOfLines={2}>
-            {item.name.substring(0, 25)}
+            {item.name.substring(0, 15)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
           <View style={styles.addToCartBtn}>
@@ -208,6 +208,7 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.White,
     flex: 1,
+    padding: 10,
   },
   container: {
     borderRadius: 20,

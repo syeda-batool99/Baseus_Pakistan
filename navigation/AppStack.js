@@ -26,9 +26,10 @@ import UserAccount from '../screens/UserAccount';
 import WhatsApp from '../screens/Whatsapp';
 // import Icon from 'react-native-vector-icons';
 import {Linking} from 'react-native';
-import Wallet from '../screens/Wallet';
-import MyWallet from '../screens/MyWallet';
+// import Wallet from '../screens/Wallet';
+// import MyWallet from '../screens/MyWallet';
 import Wishlist from '../screens/Wishlist';
+import AboutUs from '../screens/AboutUs';
 
 const HomeStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -192,8 +193,9 @@ const ShopStackScreen = () => {
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
-      <Stack.Screen name="MyWallet" component={MyWallet} />
+      {/* <Stack.Screen name="MyWallet" component={MyWallet} /> */}
       <Stack.Screen name="Wishlist" component={Wishlist} />
+      <Stack.Screen name="AboutUs" component={AboutUs} />
     </Stack.Navigator>
   );
 };
@@ -208,6 +210,7 @@ const AccountStack = () => {
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Signin" component={Signin} />
       <Stack.Screen name="UserAccount" component={UserAccount} />
+      <Stack.Screen name="AboutUs" component={AboutUs} />
     </Stack.Navigator>
   );
 };
@@ -223,8 +226,9 @@ const HomeStackScreens = () => {
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
-      <Stack.Screen name="MyWallet" component={MyWallet} />
+      {/* <Stack.Screen name="MyWallet" component={MyWallet} /> */}
       <Stack.Screen name="Wishlist" component={Wishlist} />
+      <Stack.Screen name="AboutUs" component={AboutUs} />
     </Stack.Navigator>
   );
 };

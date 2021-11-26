@@ -19,6 +19,7 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
 import {logout} from '../redux/appActions';
+import AboutUs from '../screens/AboutUs';
 
 const DrawerContent = props => {
   return (
@@ -90,7 +91,7 @@ const DrawerContent = props => {
               label="About Us"
               labelStyle={{fontSize: 17, fontWeight: 'bold'}}
               onPress={() => {
-                Linking.openURL('https://baseus.com.pk/about-us/');
+                props.navigation.navigate('AboutUs');
               }}
             />
             <DrawerItem

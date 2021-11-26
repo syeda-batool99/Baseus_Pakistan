@@ -11,15 +11,48 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import * as Colors from '../assets/Colors/index';
-import {removeItem, emptyCart} from '../redux/appActions';
+import {
+  removeItem,
+  emptyCart,
+  addToCart,
+  updateCart,
+} from '../redux/appActions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import InputSpinner from 'react-native-input-spinner';
+import Toast from 'react-native-toast-message';
 
 const Cart = props => {
-  const [refreshPage, setRefreshPage] = useState('');
+  // const [quantity, setQuantity] = useState(1);
+  // const IncreaseQuantity = item => {
+  //   if (quantity == 10) {
+  //     Toast.show({
+  //       type: 'error',
+  //       text1: 'Error',
+  //       text2: 'Maximum quantity limit is 10',
+  //       position: 'top',
+  //     });
+  //   } else {
+  //     setQuantity(quantity + 1);
+  //     props.UpdateCart(item, quantity, (operation = 'add'));
+  //   }
+  // };
+  // const DecreaseQuantity = item => {
+  //   if (quantity == 1) {
+  //     Toast.show({
+  //       type: 'error',
+  //       text1: 'Error',
+  //       text2: 'Minimum quantity limit is 1',
+  //       position: 'top',
+  //     });
+  //   } else {
+  //     setQuantity(quantity - 1);
+  //     props.UpdateCart(item, quantity, (operation = 'subtract'));
+  //   }
+  // };
   const cartItemsRender = ({item}) => {
     const index = props.cartItems.indexOf(item);
-    // console.log('index', index)
+    // console.log('cartOteems', item);
     return (
       <View style={styles.cartItemsContainer}>
         <View style={styles.ItemContainer}>
@@ -37,7 +70,16 @@ const Cart = props => {
         </View>
         <View style={styles.ItemContainer2}>
           <Text style={styles.subheading}>Quantity: </Text>
-          <InputSpinner
+          <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+            <TouchableOpacity onPress={() => props.UpdateCart(item, false)}>
+              <AntDesign name={'minuscircle'} size={25} />
+            </TouchableOpacity>
+            <Text style={{marginHorizontal: 10}}>{item.qty}</Text>
+            <TouchableOpacity onPress={() => props.UpdateCart(item, true)}>
+              <AntDesign name={'pluscircle'} size={25} />
+            </TouchableOpacity>
+          </View>
+          {/* <InputSpinner
             max={10}
             min={1}
             step={1}
@@ -53,13 +95,16 @@ const Cart = props => {
             // colorMin={'#40c5f4'}
             // value={this.state.number}
             onChange={num => {
-              setRefreshPage('refresh');
+              // quantity = num;
+              console.log('Num', num);
+              props.UpdateCart(item, num);
+              // console.log('quantity', quantity);
             }}
-          />
+          /> */}
         </View>
         {/* <View style={styles.ItemContainer2}>
-          <Text style={styles.subheading}>Subtotal: </Text>
-          <Text style={styles.value}> Rs. {item.total}</Text>
+          <Text style={styles.subheading}>Product total: </Text>
+          <Text style={styles.value}> Rs. {item.cartTotal}</Text>
         </View> */}
       </View>
     );
@@ -264,6 +309,9 @@ const mapDispatchToProps = dispatch => {
   return {
     RemoveItem: (body, id) => dispatch(removeItem(body, id)),
     EmptyCart: () => dispatch(emptyCart()),
+    AddToCart: body => dispatch(addToCart(body)),
+    UpdateCart: (body, num, operation) =>
+      dispatch(updateCart(body, num, operation)),
   };
 };
 

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import * as Colors from '../assets/Colors/index';
 import {View, Text} from 'react-native';
-import Wallet from '../screens/Wallet';
+// import Wallet from '../screens/Wallet';
 
 const ShoppingcartItems = props => {
   return (
@@ -30,7 +30,7 @@ const ShoppingcartItems = props => {
           {props.cartItems.length}
         </Text>
       </View>
-      {props.user && <Wallet navigation={props.navigation} />}
+      {/* {props.user && <Wallet navigation={props.navigation} />} */}
     </View>
   );
 };

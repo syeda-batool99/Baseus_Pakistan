@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: Colors.White,
     flex: 1,
+    paddingHorizontal: 10,
   },
   container: {
     borderRadius: 20,
