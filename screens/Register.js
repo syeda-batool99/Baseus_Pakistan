@@ -54,10 +54,6 @@ const Register = props => {
       .string()
       .required('Password is a required field')
       .min(8, 'Password must be atleast 8 characters'),
-    passwordConfirmation: yup
-      .string()
-      .required('Confirm password is a required field')
-      .oneOf([yup.ref('password'), null], 'Passwords must match'),
   });
   return (
     <ScrollView style={{paddingHorizontal: 15}}>
@@ -66,7 +62,7 @@ const Register = props => {
         <Text style={{fontSize: 22, marginHorizontal: 20}}>Register</Text>
         <View style={{margin: 15}}>
           <Formik
-            initialValues={{email: '', password: '', passwordConfirmation: ''}}
+            initialValues={{email: '', password: ''}}
             validationSchema={reviewSchema}
             onSubmit={(values, actions) => {
               actions.resetForm();
@@ -128,40 +124,6 @@ const Register = props => {
                           ? propss.errors.password
                           : ''}
                       </Text>
-                    </View>
-                  </View>
-                  <View style={{marginBottom: 7}}>
-                    <View>
-                      <TextInput
-                        style={
-                          propss.errors.passwordConfirmation &&
-                          propss.touched.passwordConfirmation
-                            ? styles.errorInput
-                            : styles.input
-                        }
-                        secureTextEntry={true}
-                        placeholder=" Confirm Password"
-                        autoCompleteType="password"
-                        onChangeText={propss.handleChange(
-                          'passwordConfirmation',
-                        )}
-                        value={propss.values.passwordConfirmation}
-                        onBlur={propss.handleBlur('passwordConfirmation')}
-                      />
-                      {/* {propss.errors.passwordConfirmation &&
-                        propss.touched.passwordConfirmation ? ( */}
-                      <View>
-                        <Text
-                          style={{
-                            color: 'red',
-                          }}>
-                          {propss.errors.passwordConfirmation &&
-                          propss.touched.passwordConfirmation
-                            ? propss.errors.passwordConfirmation
-                            : ''}
-                        </Text>
-                        {/* ) : null} */}
-                      </View>
                     </View>
                   </View>
                 </View>
@@ -227,8 +189,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Yellow,
     textAlign: 'center',
     borderRadius: 12,
-    fontStyle: 'italic',
+    // fontStyle: 'italic',
     padding: 10,
+    fontWeight: '600',
   },
   btnContainer: {
     width: '100%',

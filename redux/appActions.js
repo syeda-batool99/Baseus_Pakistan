@@ -23,8 +23,8 @@ import {Alert} from 'react-native';
 import Toast from 'react-native-toast-message';
 // import {URL, loginRoute, signupRoute, verifyCNICRoute} from '../config/const';
 
-export const getProducts = () => async dispatch => {
-  const url = `${Constants.URL.wc}products?per_page=100&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+export const getProducts = page => async dispatch => {
+  const url = `${Constants.URL.wc}products?per_page=100&exclude=8401&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
   try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);
@@ -34,7 +34,7 @@ export const getProducts = () => async dispatch => {
     });
     return response.data;
   } catch (error) {
-    console.log('error getProducts', error);
+    console.log('error getProducts', error.message);
     Toast.show({
       type: 'error',
       text1: 'Error',

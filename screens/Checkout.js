@@ -15,7 +15,7 @@ import {connect} from 'react-redux';
 import {emptyCart} from '../redux/appActions';
 import {Formik} from 'formik';
 import Toast from 'react-native-toast-message';
-import CountrySelectDropdown from 'react-native-searchable-country-dropdown';
+import * as yup from 'yup';
 
 const Checkout = props => {
   // const handleSubmit = values => {
@@ -31,6 +31,26 @@ const Checkout = props => {
       position: 'top',
     });
   };
+
+  const reviewSchema = yup.object({
+    firstName: yup.string().required('Name is a required field'),
+    lastName: yup.string().required('Name is a required field'),
+    country: yup.string().required('Country is a required field'),
+    address: yup.string().required('Address is a required field'),
+    city: yup.string().required('City is a required field'),
+    state: yup.string().required('State is a required field'),
+    phone: yup
+      .string()
+      .required('Phone Number is a required field')
+      .min(11, 'Phone number must be 11 characters'),
+    email: yup
+      .string()
+      .required('Email is a required field')
+      .matches(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        'Invalid Email',
+      ),
+  });
 
   return (
     <ScrollView style={styles.background}>
@@ -52,6 +72,7 @@ const Checkout = props => {
             PaymentMethodTitle: 'Cash on Delivery',
             lineItems: [],
           }}
+          validationSchema={reviewSchema}
           onSubmit={(values, {resetForm}) => {
             props.EmptyCart();
             showToast();
@@ -72,7 +93,11 @@ const Checkout = props => {
                       justifyContent: 'space-between',
                     }}>
                     <TextInput
-                      style={[styles.input, {width: '48%'}]}
+                      style={
+                        propss.errors.firstName && propss.touched.firstName
+                          ? [styles.errorInput, {width: '48%'}]
+                          : [styles.input, {width: '48%'}]
+                      }
                       placeholder=" First Name"
                       placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('firstName')}
@@ -80,7 +105,11 @@ const Checkout = props => {
                       onBlur={propss.handleBlur('firstName')}
                     />
                     <TextInput
-                      style={[styles.input, {width: '48%'}]}
+                      style={
+                        propss.errors.lastName && propss.touched.lastName
+                          ? [styles.errorInput, {width: '48%'}]
+                          : [styles.input, {width: '48%'}]
+                      }
                       placeholder=" Last Name"
                       placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('lastName')}
@@ -88,10 +117,22 @@ const Checkout = props => {
                       onBlur={propss.handleBlur('lastName')}
                     />
                   </View>
+                  <View>
+                    <Text style={{color: 'red'}}>
+                      {(propss.errors.firstName && propss.touched.firstName) ||
+                      (propss.errors.lastName && propss.touched.lastName)
+                        ? propss.errors.firstName
+                        : ''}
+                    </Text>
+                  </View>
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
-                    style={[styles.input]}
+                    style={
+                      propss.errors.country && propss.touched.country
+                        ? styles.errorInput
+                        : styles.input
+                    }
                     placeholder=" Country"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('country')}
@@ -111,41 +152,85 @@ const Checkout = props => {
                     // textColor={'#f3f3f3'}
                   /> */}
                   {/* </TextInput> */}
+                  <View>
+                    <Text style={{color: 'red'}}>
+                      {propss.errors.country && propss.touched.country
+                        ? propss.errors.country
+                        : ''}
+                    </Text>
+                  </View>
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
                     multiline
-                    style={[styles.input, {height: 80}]}
+                    style={
+                      propss.errors.country && propss.touched.country
+                        ? [styles.errorInput, {height: 80}]
+                        : [styles.input, {height: 80}]
+                    }
                     placeholder=" House number, Apartment, street name"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('address')}
                     value={propss.values.address}
                     onBlur={propss.handleBlur('address')}
                   />
+                  <View>
+                    <Text style={{color: 'red'}}>
+                      {propss.errors.address && propss.touched.address
+                        ? propss.errors.address
+                        : ''}
+                    </Text>
+                  </View>
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
-                    style={[styles.input]}
+                    style={
+                      propss.errors.city && propss.touched.city
+                        ? styles.errorInput
+                        : styles.input
+                    }
                     placeholder=" City"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('city')}
                     value={propss.values.city}
                     onBlur={propss.handleBlur('city')}
                   />
+                  <View>
+                    <Text style={{color: 'red'}}>
+                      {propss.errors.city && propss.touched.city
+                        ? propss.errors.city
+                        : ''}
+                    </Text>
+                  </View>
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
-                    style={[styles.input]}
+                    style={
+                      propss.errors.state && propss.touched.state
+                        ? styles.errorInput
+                        : styles.input
+                    }
                     placeholder=" State"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('state')}
                     value={propss.values.state}
                     onBlur={propss.handleBlur('state')}
                   />
+                  <View>
+                    <Text style={{color: 'red'}}>
+                      {propss.errors.state && propss.touched.state
+                        ? propss.errors.state
+                        : ''}
+                    </Text>
+                  </View>
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
-                    style={[styles.input]}
+                    style={
+                      propss.errors.phone && propss.touched.phone
+                        ? styles.errorInput
+                        : styles.input
+                    }
                     placeholder=" Phone"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('phone')}
@@ -153,16 +238,34 @@ const Checkout = props => {
                     onBlur={propss.handleBlur('phone')}
                     keyboardType="numeric"
                   />
+                  <View>
+                    <Text style={{color: 'red'}}>
+                      {propss.errors.phone && propss.touched.phone
+                        ? propss.errors.phone
+                        : ''}
+                    </Text>
+                  </View>
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
-                    style={[styles.input]}
+                    style={
+                      propss.errors.email && propss.touched.email
+                        ? styles.errorInput
+                        : styles.input
+                    }
                     placeholder=" Email Address"
                     placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('email')}
                     value={propss.values.email}
                     onBlur={propss.handleBlur('email')}
                   />
+                  <View>
+                    <Text style={{color: 'red'}}>
+                      {propss.errors.email && propss.touched.email
+                        ? propss.errors.email
+                        : ''}
+                    </Text>
+                  </View>
                 </View>
                 <View style={{marginBottom: 7}}>
                   <TextInput
@@ -195,6 +298,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
     paddingVertical: 10,
+  },
+  errorInput: {
+    height: 40,
+    borderColor: 'red',
+    borderWidth: 1,
+    borderRadius: 10,
+    // marginBottom: 35,
+    backgroundColor: '#FEF8FF',
+    // width: 302,
+    padding: 10,
+    color: 'black',
+    // paddingVertical: 0,
+    fontSize: 16,
   },
   heading: {
     // color: 'white',

@@ -121,7 +121,12 @@ const ProductDetail = props => {
         <Text style={styles.itemCategory}>
           Category: {item.categories[0].name}
         </Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            margin: 10,
+          }}>
           <Text style={styles.itemPrice}>Rs. {Number(item.price)}</Text>
           <TouchableOpacity
             style={styles.buttonContainer}
@@ -310,6 +315,7 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: Colors.VeryDarkGray,
     marginVertical: 5,
+    marginTop: 10,
   },
   heading: {
     // color: 'white',

@@ -31,8 +31,9 @@ import WhatsApp from './Whatsapp';
 const Home = props => {
   const [ProductsFromApiCall, setProducts] = useState([]);
   const [Categories, setCategories] = useState([]);
+  const [page, setPage] = useState(1);
   async function temp() {
-    setProducts(await props.GetProducts());
+    setProducts(await props.GetProducts(page));
     setCategories(await props.GetCategories());
   }
   const images = {
@@ -46,6 +47,9 @@ const Home = props => {
 
   useEffect(() => {
     temp();
+    // setInterval(() => {
+    //   temp();
+    // }, 2000);
   }, []);
 
   const renderItem = item => <Item item={item.item} />;
@@ -66,12 +70,19 @@ const Home = props => {
     );
   };
 
+  // const renderFooter = () => {
+  //   return (
+
+  //   );
+  // };
+
   const renderProduct = item => <Product item={item.item} />;
 
   const Product = ({item}) => {
     const discountedPrice = item.regular_price - item.sale_price;
     const number = discountedPrice / item.regular_price;
     const percentage = Math.round(number * 100);
+    var shortenedName = item.name.split(' ');
     // console.log('product', item.image);
     return (
       <TouchableOpacity
@@ -115,7 +126,7 @@ const Home = props => {
             // ellipsizeMode={'tail'}
             style={styles.productName}
             numberOfLines={2}>
-            {item.name.substring(0, 25)}
+            {item.name.substring(0, 15)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
           <View style={styles.addToCartBtn}>
@@ -180,8 +191,19 @@ const Home = props => {
           data={ProductsFromApiCall}
           renderItem={renderProduct}
           keyExtractor={item => item.id}
+          // ListFooterComponent={renderFooter}
         />
       </SafeAreaView>
+      {/* <View>
+        <TouchableOpacity
+          onPress={(() => setPage(page + 1), temp())}
+          style={styles.button}>
+          <Text
+            style={{color: 'black', textAlign: 'center', fontWeight: '700'}}>
+            Load More
+          </Text>
+        </TouchableOpacity>
+      </View> */}
     </ScrollView>
   );
 };
@@ -237,7 +259,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     // color: 'white',
     fontWeight: 'bold',
-    // width: 100,
+    // width: '30%',
     textAlign: 'left',
     // height: 100,
   },
@@ -256,6 +278,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginBottom: 10,
   },
+  button: {
+    backgroundColor: Colors.LightYellow,
+    marginBottom: 20,
+    padding: 10,
+    width: '60%',
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
 });
 
 const mapStateToProps = state => ({
@@ -267,7 +298,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     AddToCart: body => dispatch(addToCart(body)),
-    GetProducts: () => dispatch(getProducts()),
+    GetProducts: page => dispatch(getProducts(page)),
     GetCategories: () => dispatch(getCategories()),
     AddToWishlist: body => dispatch(addToWishlist(body)),
   };

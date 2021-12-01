@@ -62,11 +62,11 @@ const Cart = props => {
         </View>
         <View style={styles.ItemContainer2}>
           <Text style={styles.subheading}>Product: </Text>
-          <Text style={styles.value}> {item.name}</Text>
+          <Text style={styles.value}>{item.name}</Text>
         </View>
         <View style={styles.ItemContainer2}>
           <Text style={styles.subheading}>Price: </Text>
-          <Text style={styles.value}> Rs. {item.price}</Text>
+          <Text style={styles.value}>Rs. {item.price}</Text>
         </View>
         <View style={styles.ItemContainer2}>
           <Text style={styles.subheading}>Quantity: </Text>
@@ -274,7 +274,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Yellow,
     textAlign: 'center',
     borderRadius: 12,
-    fontStyle: 'italic',
+    // fontStyle: 'italic',
+    fontWeight: '600',
     padding: 10,
   },
   btnContainer: {
