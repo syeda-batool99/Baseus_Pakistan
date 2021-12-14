@@ -55,7 +55,7 @@ const Home = props => {
   const renderItem = item => <Item item={item.item} />;
 
   const Item = ({item}) => {
-    // console.log('item', item.image);
+    // console.log('item', item.image.src);
     return (
       <TouchableOpacity
         onPress={() => {

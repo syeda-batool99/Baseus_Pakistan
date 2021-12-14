@@ -16,6 +16,7 @@ import {emptyCart} from '../redux/appActions';
 import {Formik} from 'formik';
 import Toast from 'react-native-toast-message';
 import * as yup from 'yup';
+import RNSmtpMailer from 'react-native-smtp-mailer';
 
 const Checkout = props => {
   // const handleSubmit = values => {
@@ -32,6 +33,61 @@ const Checkout = props => {
     });
   };
 
+  const sendMailToUser = (firstName, lastName, email) => {
+    RNSmtpMailer.sendMail({
+      mailhost: 'smtp.gmail.com',
+      port: '465',
+      ssl: true, // optional. if false, then TLS is enabled. Its true by default in android. In iOS TLS/SSL is determined automatically, and this field doesn't affect anything
+      username: 'baseusorders@gmail.com',
+      password: 'b@seus123',
+      // fromName: 'Baseus Pakistan', // optional
+      recipients: email,
+      subject: 'Order Received',
+      htmlBody: `<h1>Hello ${firstName} ${lastName}, </h1> <h2> Thankyou for your order </h2>`,
+      attachmentNames: [
+        'image.jpg',
+        'firstFile.txt',
+        'secondFile.csv',
+        'pdfFile.pdf',
+        'zipExample.zip',
+        'pngImage.png',
+      ], // required in android, these are renames of original files. in ios filenames will be same as specified in path. In a ios-only application, no need to define it
+    })
+      .then(success => console.log(success))
+      .catch(err => console.log('Error in sendmail', err));
+  };
+
+  const sendMailToAdmin = (
+    firstName,
+    lastName,
+    address,
+    city,
+    country,
+    phone,
+    state,
+  ) => {
+    RNSmtpMailer.sendMail({
+      mailhost: 'smtp.gmail.com',
+      port: '465',
+      ssl: true, // optional. if false, then TLS is enabled. Its true by default in android. In iOS TLS/SSL is determined automatically, and this field doesn't affect anything
+      username: 'baseusorders@gmail.com',
+      password: 'b@seus123',
+      // fromName: 'Baseus Pakistan', // optional
+      recipients: 'orders@baseus.com.pk',
+      subject: 'New customer Order',
+      htmlBody: `<h1>You have received an order from ${firstName} ${lastName} </h1> <p> Address is: ${address}, ${city}, ${state}, ${country}. </p> <p> Contact Number: ${phone} </p>`,
+      attachmentNames: [
+        'image.jpg',
+        'firstFile.txt',
+        'secondFile.csv',
+        'pdfFile.pdf',
+        'zipExample.zip',
+        'pngImage.png',
+      ], // required in android, these are renames of original files. in ios filenames will be same as specified in path. In a ios-only application, no need to define it
+    })
+      .then(success => console.log(success))
+      .catch(err => console.log('Error in sendmail', err));
+  };
   const reviewSchema = yup.object({
     firstName: yup.string().required('Name is a required field'),
     lastName: yup.string().required('Name is a required field'),
@@ -77,6 +133,16 @@ const Checkout = props => {
             props.EmptyCart();
             showToast();
             resetForm({});
+            sendMailToUser(values.firstName, values.lastName, values.email);
+            sendMailToAdmin(
+              values.firstName,
+              values.lastName,
+              values.address,
+              values.city,
+              values.country,
+              values.phone,
+              values.state,
+            );
           }}>
           {propss => (
             <View>
