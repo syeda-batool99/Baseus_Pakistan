@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     // fontStyle: 'italic',
     padding: 10,
-    fontWeight: '600',
+    fontWeight: '800',
   },
   btnContainer: {
     width: '100%',

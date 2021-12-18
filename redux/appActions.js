@@ -24,7 +24,7 @@ import Toast from 'react-native-toast-message';
 // import {URL, loginRoute, signupRoute, verifyCNICRoute} from '../config/const';
 
 export const getProducts = page => async dispatch => {
-  const url = `${Constants.URL.wc}products?per_page=100&exclude=8401&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
+  const url = `${Constants.URL.wc}products?per_page=100&exclude=8650&consumer_key=${Constants.Keys.ConsumerKey}&consumer_secret=${Constants.Keys.ConsumerSecret}`;
   try {
     let response = await axios.get(url);
     // console.log('response getProducts', response.data[0]);

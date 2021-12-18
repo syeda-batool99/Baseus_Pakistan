@@ -31,9 +31,9 @@ const DrawerContent = props => {
           <View style={styles.userInfoSection}>
             <View style={{marginTop: 70}}>
               <Image
-                source={require('../assets/Images/logo.png')}
+                source={require('../assets/Images/base_us_logo.png')}
                 style={{
-                  width: 130,
+                  width: 140,
                   height: 130,
                   borderRadius: 58,
                   borderWidth: 5,
