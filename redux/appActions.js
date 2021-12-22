@@ -196,9 +196,9 @@ export const signin = body => async dispatch => {
     console.log('in signin got response', response.data);
     await dispatch({
       type: SIGNIN_USER,
-      payload: response.data.data,
+      payload: response.data,
     });
-    return response.data.data;
+    return response.data;
   } catch (error) {
     console.log('error signin', error.response.data.message);
     Toast.show({

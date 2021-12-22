@@ -124,8 +124,7 @@ const Home = props => {
           <Text
             // adjustsFontSizeToFit= {true}
             // ellipsizeMode={'tail'}
-            style={styles.productName}
-            numberOfLines={2}>
+            style={styles.productName}>
             {item.name.substring(0, 15)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>

@@ -16,6 +16,7 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 
 const UserAccount = props => {
+  console.log('props in user account', props);
   return (
     <ScrollView>
       <View style={styles.box}>
@@ -23,7 +24,9 @@ const UserAccount = props => {
           <FontAwesome name={'user-circle'} size={30} />
           <Text style={styles.userName}>
             Hello{' '}
-            {props.user.username ? props.user.username : props.user.displayName}
+            {props.user.username
+              ? props.user.username
+              : props.user.user_display_name}
           </Text>
         </View>
         <View

@@ -41,9 +41,18 @@ const DrawerContent = props => {
                   backgroundColor: 'black',
                 }}
               />
-              <Text style={{fontWeight: 'bold', fontSize: 20}}>
-                Baseus Pakistan
-              </Text>
+              {props.loggedIn ? (
+                <Text style={{fontWeight: 'bold', fontSize: 20}}>
+                  Welcome{' '}
+                  {props.user.username
+                    ? props.user.username
+                    : props.user.user_display_name}
+                </Text>
+              ) : (
+                <Text style={{fontWeight: 'bold', fontSize: 20}}>
+                  Baseus Pakistan
+                </Text>
+              )}
             </View>
           </View>
           <Drawer.Section style={styles.drawerSection}>

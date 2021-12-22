@@ -23,6 +23,7 @@ import {
 } from '../redux/appActions';
 import HTMLView from 'react-native-htmlview';
 import DropDownPicker from 'react-native-dropdown-picker';
+import {SliderBox} from 'react-native-image-slider-box';
 
 const ProductDetail = props => {
   const item = props.route.params.item;
@@ -107,14 +108,26 @@ const ProductDetail = props => {
     );
   };
 
+  const images = [];
+  for (let i = 0; i < item.images.length; i++) {
+    images.push(item.images[i].src);
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image
+        <SliderBox
+          images={images}
+          resizeMode={'repeat'}
+          dotColor="#000000"
+          autoplay
+          circleLoop
+        />
+        {/* <Image
           source={{uri: item.images[0].src}}
           style={styles.imageStyle}
           resizeMode={'cover'}
-        />
+        /> */}
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
@@ -169,7 +182,11 @@ const ProductDetail = props => {
           </View>
         )}
 
-        <HTMLView value={item.description} />
+        {item.short_description ? (
+          <HTMLView value={item.short_description} />
+        ) : (
+          <View></View>
+        )}
 
         {/* <WebView
         style={
@@ -265,9 +282,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   imageContainer: {
-    height: 250,
-    width: 250,
-    alignSelf: 'center',
+    // flex: 1,
+    // width: null,
+    // height: null,
+    // resizeMode: 'contain',
   },
   imageStyle: {
     width: '100%',
