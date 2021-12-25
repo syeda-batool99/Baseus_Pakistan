@@ -19,7 +19,6 @@ import {
 } from './ActionTypes';
 import axios from 'axios';
 import Constants from './Constants';
-import {Alert} from 'react-native';
 import Toast from 'react-native-toast-message';
 // import {URL, loginRoute, signupRoute, verifyCNICRoute} from '../config/const';
 
@@ -35,12 +34,6 @@ export const getProducts = page => async dispatch => {
     return response.data;
   } catch (error) {
     console.log('error getProducts', error.message);
-    Toast.show({
-      type: 'error',
-      text1: 'Error',
-      text2: error,
-      position: 'top',
-    });
   }
 };
 
@@ -162,12 +155,6 @@ export const signup = body => async dispatch => {
     return response.data;
   } catch (error) {
     console.log('error signup', error.response.data.message);
-    Toast.show({
-      type: 'error',
-      text1: 'Signup Error',
-      text2: error.response.data.message,
-      position: 'top',
-    });
   }
 };
 
@@ -201,28 +188,7 @@ export const signin = body => async dispatch => {
     return response.data;
   } catch (error) {
     console.log('error signin', error.response.data.message);
-    Toast.show({
-      type: 'error',
-      text1: 'Signin Error',
-      text2: error.response.data.message,
-      position: 'top',
-    });
   }
-  // axios
-  //   .post(url, body)
-  //   .then(response => {
-  //     console.log('in signin got response', response.data);
-  //     // let token = response?.data?.data?.token;
-  //     // console.log('token', token);
-  //     // props.GetUser(response.data.id);
-  //     dispatch({
-  //       type: SIGNIN_USER,
-  //       payload: response.data.data,
-  //     });
-  //   })
-  //   .catch(error => {
-  //     Alert.alert('Signin Error', error.response.data.message);
-  //   });
 };
 
 export const addToCart = item => async dispatch => {

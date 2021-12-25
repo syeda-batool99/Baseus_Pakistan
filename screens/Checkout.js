@@ -8,7 +8,6 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {connect} from 'react-redux';
@@ -205,19 +204,6 @@ const Checkout = props => {
                     value={propss.values.country}
                     onBlur={propss.handleBlur('country')}
                   />
-                  {/* <CountrySelectDropdown
-                    countrySelect={country => {
-                      propss.handleChange('country');
-                      propss.values.country;
-                      console.log(country);
-                    }}
-                    defaultCountry="PK"
-                    error={msg => console.log(msg)}
-                    style={[styles.input]}
-                    // fontFamily={"Nunito-Regular"}
-                    // textColor={'#f3f3f3'}
-                  /> */}
-                  {/* </TextInput> */}
                   <View>
                     <Text style={{color: 'red'}}>
                       {propss.errors.country && propss.touched.country

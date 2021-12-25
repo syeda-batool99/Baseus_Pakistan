@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
@@ -33,10 +32,6 @@ const Register = props => {
 
         props.navigation.navigate('Home');
       }
-      // if (result.error) {
-      //   console.log('result.error', result.error);
-      //   Alert.alert(result.error);
-      // }
     } catch (error) {
       console.log('error d: ', error);
     }

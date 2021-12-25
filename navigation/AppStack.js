@@ -42,7 +42,7 @@ const openWhatsApp = () => {
       console.log('WhatsApp Opened successfully ' + data);
     })
     .catch(() => {
-      alert('Make sure WhatsApp installed on your device');
+      console.log('Make sure WhatsApp installed on your device');
     });
 };
 

@@ -6,7 +6,6 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Alert,
   TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';

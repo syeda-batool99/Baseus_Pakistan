@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
 import * as Colors from '../assets/Colors/index';
 import {Formik} from 'formik';
@@ -15,7 +14,6 @@ import * as yup from 'yup';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {signin, signinValidate} from '../redux/appActions';
-import CustomAlert from '../shared/CustomAlert';
 
 const Signin = props => {
   const [modalVisible, setModalVisible] = useState(false);

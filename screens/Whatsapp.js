@@ -25,10 +25,10 @@ const WhatsApp = () => {
           console.log('WhatsApp Opened successfully ' + data);
         })
         .catch(() => {
-          alert('Make sure WhatsApp installed on your device');
+          console.log('Make sure WhatsApp installed on your device');
         });
     } else {
-      alert('Please enter message to send');
+      console.log('Please enter message to send');
     }
   };
   return (

@@ -87,7 +87,7 @@ const Shop = props => {
             // adjustsFontSizeToFit= {true}
             // ellipsizeMode={'tail'}
             style={styles.productName}>
-            {item.name.substring(0, 15)}
+            {item.name.substring(0, 11)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
           <View style={styles.addToCartBtn}>
