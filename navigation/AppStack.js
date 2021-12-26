@@ -30,6 +30,7 @@ import {Linking} from 'react-native';
 // import MyWallet from '../screens/MyWallet';
 import Wishlist from '../screens/Wishlist';
 import AboutUs from '../screens/AboutUs';
+import ForgotPassword from '../screens/ForgotPassword';
 
 const HomeStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -209,6 +210,7 @@ const AccountStack = () => {
       <Stack.Screen name="Account" component={Account} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Signin" component={Signin} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="UserAccount" component={UserAccount} />
       <Stack.Screen name="AboutUs" component={AboutUs} />
     </Stack.Navigator>

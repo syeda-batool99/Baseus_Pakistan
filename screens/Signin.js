@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {signin, signinValidate} from '../redux/appActions';
+import Toast from 'react-native-toast-message';
 
 const Signin = props => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,9 +28,28 @@ const Signin = props => {
         'Invalid Email',
       ),
   });
+
+  // const sendCode = async email => {
+  //   console.log('email', email);
+  //   const url = 'https://baseus.com.pk/wp-json/bdpwr/v1/reset-password';
+  //   try {
+  //     let response = await axios.post(url, {email});
+  //     console.log('response in sendCode', response.data.message);
+  //     Toast.show({
+  //       type: 'success',
+  //       text1: 'Successful',
+  //       text2: 'A Code has been sent to your email',
+  //       position: 'top',
+  //     });
+  //     return response;
+  //   } catch (error) {
+  //     console.log('error sendCode', error.message);
+  //   }
+  // };
+
   return (
     <ScrollView>
-      <Modal
+      {/* <Modal
         animationType="slide"
         transparent={false}
         visible={modalVisible}
@@ -46,6 +66,7 @@ const Signin = props => {
               initialValues={{email: ''}}
               validationSchema={reviewSchema}
               onSubmit={(values, actions) => {
+                sendCode(values.email);
                 setModalVisible(!modalVisible);
               }}>
               {propss => (
@@ -95,7 +116,7 @@ const Signin = props => {
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      </Modal> */}
       <View style={styles.box}>
         <Text style={{fontSize: 22, marginHorizontal: 20}}>Login</Text>
         <View style={{margin: 15}}>
@@ -159,7 +180,10 @@ const Signin = props => {
                     <Text style={styles.forgotText}>Create Account</Text>
                   </TouchableOpacity>
                   <Text style={{paddingHorizontal: 10}}> | </Text>
-                  <TouchableOpacity onPress={() => setModalVisible(true)}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      props.MainProps.navigation.navigate('ForgotPassword')
+                    }>
                     <Text style={styles.forgotText}>Forgot Password?</Text>
                   </TouchableOpacity>
                 </View>
