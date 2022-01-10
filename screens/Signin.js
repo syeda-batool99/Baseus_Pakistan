@@ -84,7 +84,6 @@ const Signin = props => {
                             ? styles.errorInput
                             : styles.input
                         }
-                        placeholder="example@gmail.com"
                         onChangeText={propss.handleChange('email')}
                         value={propss.values.email}
                         onBlur={propss.handleBlur('email')}
@@ -139,8 +138,6 @@ const Signin = props => {
                   <View style={{marginBottom: 7}}>
                     <TextInput
                       style={styles.input}
-                      placeholder=" Email/Username"
-                      placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('username')}
                       value={propss.values.username}
                       onBlur={propss.handleBlur('username')}
@@ -149,9 +146,6 @@ const Signin = props => {
                   <View style={{marginBottom: 7}}>
                     <TextInput
                       style={styles.input}
-                      placeholder=" Password"
-                      placeholderTextColor={Colors.LightGray}
-                      onChangeText={propss.handleChange('password')}
                       value={propss.values.password}
                       onBlur={propss.handleBlur('password')}
                       type="password"
@@ -164,7 +158,7 @@ const Signin = props => {
                   <TouchableOpacity
                     onPress={propss.handleSubmit}
                     style={styles.btnContainer}>
-                    <Text style={styles.button}>LOG IN</Text>
+                    <Text style={styles.button}>LOGIN</Text>
                   </TouchableOpacity>
                 </View>
                 <View

@@ -276,6 +276,7 @@ const styles = StyleSheet.create({
     // fontStyle: 'italic',
     fontWeight: '600',
     padding: 10,
+    color: 'black',
   },
   btnContainer: {
     width: '50%',

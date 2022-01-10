@@ -125,7 +125,7 @@ const Home = props => {
             // adjustsFontSizeToFit= {true}
             // ellipsizeMode={'tail'}
             style={styles.productName}>
-            {item.name.substring(0, 11)}
+            {item.name.substring(7, 18)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
           <View style={styles.addToCartBtn}>

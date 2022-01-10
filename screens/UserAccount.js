@@ -98,8 +98,6 @@ const UserAccount = props => {
                         ? [styles.errorInput]
                         : [styles.input]
                     }
-                    placeholder=" Password"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('password')}
                     value={propss.values.password}
                     onBlur={propss.handleBlur('password')}
@@ -122,8 +120,6 @@ const UserAccount = props => {
                         ? [styles.errorInput]
                         : [styles.input]
                     }
-                    placeholder=" Phone Number"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('number')}
                     value={propss.values.number}
                     onBlur={propss.handleBlur('number')}
@@ -183,8 +179,6 @@ const UserAccount = props => {
                           ? [styles.errorInput, {width: '48%'}]
                           : [styles.input, {width: '48%'}]
                       }
-                      placeholder=" First Name"
-                      placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('firstName')}
                       value={propss.values.firstName}
                       onBlur={propss.handleBlur('firstName')}
@@ -195,8 +189,6 @@ const UserAccount = props => {
                           ? [styles.errorInput, {width: '48%'}]
                           : [styles.input, {width: '48%'}]
                       }
-                      placeholder=" Last Name"
-                      placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('lastName')}
                       value={propss.values.lastName}
                       onBlur={propss.handleBlur('lastName')}
@@ -218,8 +210,6 @@ const UserAccount = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" Country"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('country')}
                     value={propss.values.country}
                     onBlur={propss.handleBlur('country')}
@@ -240,8 +230,6 @@ const UserAccount = props => {
                         ? [styles.errorInput, {height: 80}]
                         : [styles.input, {height: 80}]
                     }
-                    placeholder=" House number, Apartment, street name"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('address')}
                     value={propss.values.address}
                     onBlur={propss.handleBlur('address')}
@@ -261,8 +249,6 @@ const UserAccount = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" City"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('city')}
                     value={propss.values.city}
                     onBlur={propss.handleBlur('city')}
@@ -282,8 +268,6 @@ const UserAccount = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" State"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('state')}
                     value={propss.values.state}
                     onBlur={propss.handleBlur('state')}
@@ -303,8 +287,6 @@ const UserAccount = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" Phone"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('phone')}
                     value={propss.values.phone}
                     onBlur={propss.handleBlur('phone')}
@@ -325,8 +307,6 @@ const UserAccount = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" Email Address"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('email')}
                     value={propss.values.email}
                     onBlur={propss.handleBlur('email')}

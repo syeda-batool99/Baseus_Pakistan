@@ -163,8 +163,6 @@ const Checkout = props => {
                           ? [styles.errorInput, {width: '48%'}]
                           : [styles.input, {width: '48%'}]
                       }
-                      placeholder=" First Name"
-                      placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('firstName')}
                       value={propss.values.firstName}
                       onBlur={propss.handleBlur('firstName')}
@@ -175,8 +173,6 @@ const Checkout = props => {
                           ? [styles.errorInput, {width: '48%'}]
                           : [styles.input, {width: '48%'}]
                       }
-                      placeholder=" Last Name"
-                      placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('lastName')}
                       value={propss.values.lastName}
                       onBlur={propss.handleBlur('lastName')}
@@ -198,8 +194,6 @@ const Checkout = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" Country"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('country')}
                     value={propss.values.country}
                     onBlur={propss.handleBlur('country')}
@@ -220,8 +214,6 @@ const Checkout = props => {
                         ? [styles.errorInput, {height: 80}]
                         : [styles.input, {height: 80}]
                     }
-                    placeholder=" House number, Apartment, street name"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('address')}
                     value={propss.values.address}
                     onBlur={propss.handleBlur('address')}
@@ -241,8 +233,6 @@ const Checkout = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" City"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('city')}
                     value={propss.values.city}
                     onBlur={propss.handleBlur('city')}
@@ -262,8 +252,6 @@ const Checkout = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" State"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('state')}
                     value={propss.values.state}
                     onBlur={propss.handleBlur('state')}
@@ -283,8 +271,6 @@ const Checkout = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" Phone"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('phone')}
                     value={propss.values.phone}
                     onBlur={propss.handleBlur('phone')}
@@ -305,8 +291,6 @@ const Checkout = props => {
                         ? styles.errorInput
                         : styles.input
                     }
-                    placeholder=" Email Address"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('email')}
                     value={propss.values.email}
                     onBlur={propss.handleBlur('email')}
@@ -323,8 +307,6 @@ const Checkout = props => {
                   <TextInput
                     multiline
                     style={[styles.input, {height: 65}]}
-                    placeholder=" Order Notes (optional)"
-                    placeholderTextColor={Colors.LightGray}
                     onChangeText={propss.handleChange('notes')}
                     value={propss.values.notes}
                     onBlur={propss.handleBlur('notes')}

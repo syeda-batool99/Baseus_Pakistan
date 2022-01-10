@@ -162,7 +162,6 @@ const ProductDetail = props => {
               setOpen={setOpen}
               setValue={setValue}
               setItems={setAttributes}
-              placeholder={item.attributes[0].name}
               defaultValue={item.attributes[0].options[0]}
               // style={{
               //   backgroundColor: '#fafafa',

@@ -87,7 +87,7 @@ const Shop = props => {
             // adjustsFontSizeToFit= {true}
             // ellipsizeMode={'tail'}
             style={styles.productName}>
-            {item.name.substring(0, 11)}
+            {item.name.substring(7, 18)}
           </Text>
           <Text style={styles.productPrice}>Rs. {item.price}</Text>
           <View style={styles.addToCartBtn}>
@@ -149,7 +149,6 @@ const Shop = props => {
           }}>
           <TextInput
             style={styles.input}
-            placeholder="  Search for Products"
             onChangeText={setSearchQuery}
             value={searchQuery}
           />

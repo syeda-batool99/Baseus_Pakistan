@@ -21,13 +21,15 @@ const ShoppingcartItems = props => {
             color: 'black',
             position: 'absolute',
             // left: 0,
-            right: 12,
+            right: 8,
             top: 0,
             bottom: 0,
             fontWeight: 'bold',
-            fontSize: 15,
+            fontSize: 13,
           }}>
-          {props.cartItems.length}
+          {props.cartItems.length < 10
+            ? '0' + props.cartItems.length
+            : props.cartItems.length}
         </Text>
       </View>
       {/* {props.user && <Wallet navigation={props.navigation} />} */}

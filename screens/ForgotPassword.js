@@ -127,7 +127,6 @@ const ForgotPassword = props => {
                             ? styles.errorInput
                             : styles.input
                         }
-                        placeholder="example@gmail.com"
                         onChangeText={propss.handleChange('email')}
                         value={propss.values.email}
                         onBlur={propss.handleBlur('email')}
@@ -184,7 +183,6 @@ const ForgotPassword = props => {
                             ? styles.errorInput
                             : styles.input
                         }
-                        placeholder="example@gmail.com"
                         onChangeText={propss.handleChange('email')}
                         value={propss.values.email}
                         onBlur={propss.handleBlur('email')}
@@ -204,7 +202,6 @@ const ForgotPassword = props => {
                             ? styles.errorInput
                             : styles.input
                         }
-                        placeholder="1234"
                         onChangeText={propss.handleChange('code')}
                         value={propss.values.code}
                         onBlur={propss.handleBlur('code')}
@@ -225,8 +222,6 @@ const ForgotPassword = props => {
                             ? styles.errorInput
                             : styles.input
                         }
-                        placeholder="********"
-                        placeholderTextColor={Colors.LightGray}
                         onChangeText={propss.handleChange('password')}
                         value={propss.values.password}
                         onBlur={propss.handleBlur('password')}

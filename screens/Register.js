@@ -80,8 +80,6 @@ const Register = props => {
                           ? styles.errorInput
                           : styles.input
                       }
-                      placeholder=" Email"
-                      placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('email')}
                       value={propss.values.email}
                       onBlur={propss.handleBlur('email')}
@@ -101,8 +99,6 @@ const Register = props => {
                           ? styles.errorInput
                           : styles.input
                       }
-                      placeholder=" Password"
-                      placeholderTextColor={Colors.LightGray}
                       onChangeText={propss.handleChange('password')}
                       value={propss.values.password}
                       onBlur={propss.handleBlur('password')}

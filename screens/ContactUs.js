@@ -317,7 +317,6 @@ const Contact = () => {
                           ? styles.errorInput
                           : styles.input
                       }
-                      placeholder="Your Name"
                       onChangeText={propss.handleChange('name')}
                       value={propss.values.name}
                       onBlur={propss.handleBlur('name')}
@@ -340,7 +339,6 @@ const Contact = () => {
                           ? styles.errorInput
                           : styles.input
                       }
-                      placeholder="example@gmail.com"
                       onChangeText={propss.handleChange('email')}
                       value={propss.values.email}
                       onBlur={propss.handleBlur('email')}
@@ -363,7 +361,6 @@ const Contact = () => {
                           ? styles.errorInput
                           : styles.input
                       }
-                      placeholder="Enter subject"
                       onChangeText={propss.handleChange('subject')}
                       value={propss.values.subject}
                       onBlur={propss.handleBlur('subject')}
@@ -388,9 +385,6 @@ const Contact = () => {
                       }
                       numberOfLines={4}
                       multiline={true}
-                      placeholder=" Message"
-                      placeholderTextColor={Colors.LightGray}
-                      onChangeText={propss.handleChange('message')}
                       value={propss.values.message}
                       onBlur={propss.handleBlur('message')}
                     />

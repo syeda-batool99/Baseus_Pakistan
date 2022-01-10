@@ -7,7 +7,6 @@ const RenderSearchbar = props => {
   return (
     <Searchbar
       style={{marginBottom: 20, marginHorizontal: 10}}
-      placeholder="Search"
       onChangeText={props.onChangeSearch}
       value={props.value}
     />
